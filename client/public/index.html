@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="theme-color" content="#000000">
+   
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
+    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
+    
+    <title>React App</title>
+    <title>React App</title>
+    <link rel="stylesheet" href="/css/bootstrap.css" />
+    <link rel="stylesheet" href="/css/main.css" />
+    <link rel="stylesheet" href="/css/skin.css" />
+    <link rel="stylesheet" href="/css/html-style.css" />
+    <link rel="stylesheet" href="/css/auth.css" />
+    <link rel="stylesheet" href="/css/footable.css" />
+    <style>
+        @media only screen and (max-width: 800px) {
+          .table tr{
+            border-top:1px solid #eceeef;
+          }
+          .table td{
+            border-top:0 !important;
+          }
+          .table {
+             border-collapse: collapse;
+          }
+         .table td{
+            display: table-row !important;
+            line-height: 50px;
+          }
+          .table th{
+           display:none;
+          }
+          .footable-details.table-striped>tbody>tr:nth-child(odd), .footable.table-striped>tbody>tr:nth-child(odd){
+            background: white !important;
+          }
+        }
+        .navbar{
+          width:100%;
+        }
+        .page-header{
+          position: fixed !important;
+          width: 100%;
+          top: 0;
+          z-index: 99;
+          overflow:hidden;
+        }
+        .card-plain {
+          border-radius: .25rem;
+          padding-bottom: .7rem;
+          max-width: 320px;
+          margin: 0 auto;
+          border-radius: .25rem;
+          padding-bottom: .7rem;
+          max-width: 320px;
+
+        }
+        .layout1{
+          position: fixed;
+          cursor: pointer;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background-color: rgba(0,0,0,0.5);
+          display: none;
+          z-index: 11;
+
+        }
+        .menu-dropdown-icon:hover > ul{
+          display:block;
+          z-index: 1;
+          
+        }
+      .navbar-nav.navbar-left .dropdown-menu1 {
+         left: auto;
+         right: 20%;
+      }
+      .dropdown-menu1:before{
+         left: auto;
+         right: 5%;
+      }
+    
+      .right-sidebar {
+         width: 600px;
+         right:-620px
+      }
+      .form-group.has-error, .form-group.has-danger {
+          margin-bottom: 0;
+      }
+      .rw-datetime-picker{
+        margin-bottom: 10px;
+      }
+      .menu > ul > li > ul {
+         margin:1px 0 0 0;
+      }
+      .CircularProgressbar{
+        width:100px;
+        height:100px;
+      }
+      .progressbar-red .CircularProgressbar-path { stroke: #f66 !important; }
+      @media (max-width: 500px){
+      .leftIcon {
+        left: 0 !important; 
+      }
+    }
+    @media only screen and (max-width: 580px) {
+      .right-sidebar {
+          width: 400px;
+          right:-420px
+      }
+    }
+
+      </style>
+  </head>
+  <body class="theme-purple index2" style="overflow: auto;">
+    <noscript>
+      You need to enable JavaScript to run this app.
+    </noscript>
+    <div id="root"></div>
+    <!--
+      This HTML file is a template.
+      If you open it directly in the browser, you will see an empty page.
+
+      You can add webfonts, meta tags, or analytics to this file.
+      The build step will place the bundled scripts into the <body> tag.
+
+      To begin the development, run `npm start` or `yarn start`.
+      To create a production bundle, use `npm run build` or `yarn build`.
+    -->
+  </body>
+</html>
