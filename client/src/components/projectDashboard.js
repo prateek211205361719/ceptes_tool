@@ -21,7 +21,7 @@ class ProjectDashboard extends Component{
         var overlay = document.getElementById("overlay");
         overlay.style.display = "block";
       
-        this.props.refreshForm(false, 'Project', 'edit');
+        this.props.refreshForm(false, 'Project', 'Edit');
     }
 
     render(){

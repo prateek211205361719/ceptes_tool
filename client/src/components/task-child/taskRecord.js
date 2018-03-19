@@ -8,8 +8,20 @@ import * as action from '../../actions';
 import { withRouter } from 'react-router-dom';
 class TaskRecord extends Component{
     state= {thead:[{label:'Name'},{label:'Priority'},{label:'Start Date'},{label:'End Date'},{label:'status'},{label:'Project'}]};
-    changeToProjectPath(projectId){
+    
+    taskRedirect(taskId){
+        var index = _.findIndex(this.props.tasks, {_id: taskId});
+        if(index > -1){
+            let task = [].concat(this.props.tasks);
+            this.props.selectedTask(task[index]);
+            this.props.history.push(`/task/${taskId}`);
+        }else{
+            alert("not found");
+        }
 
+    }
+    
+    changeToProjectPath(projectId){
        var index = _.findIndex(this.props.project, {_id: projectId});
         if(index > -1){
             var selectedProject  = [].concat(this.props.project);
@@ -22,7 +34,8 @@ class TaskRecord extends Component{
            return(
                 <tr key={`taskBody${index}`}>
                     <td style={{"display": "table-cell"}} className="footable-first-visible">
-                        {item.name}
+                       <a href="#" onClick={this.taskRedirect.bind(this, item._id)} >{item.name}</a>
+                     
                     </td>
                     <td style={{"display": "table-cell"}} className="footable-first-visible">
                         {item.priority}
@@ -34,7 +47,7 @@ class TaskRecord extends Component{
                     </td>
                     <td style={{"display": "table-cell"}} className="footable-first-visible">
                         <Moment format="YYYY/MM/DD">
-                             {item.endDate}
+                             {item.dueDate}
                         </Moment>
                     </td>
                     <td style={{"display": "table-cell"}} className="footable-first-visible">

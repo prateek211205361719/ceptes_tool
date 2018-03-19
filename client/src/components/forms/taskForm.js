@@ -1,6 +1,7 @@
 
 import React,{ Component } from 'react';
 import { Field, reduxForm, change } from 'redux-form';
+import moment from 'moment';
 import Picklist from './child/picklist';
 import ProjectMultiselect  from './child/multiselect';
 import DateTimePicker from 'react-widgets/lib/DateTimePicker';
@@ -140,7 +141,7 @@ class TaskForm extends Component{
         obj = {name: obj.name , _projectId: obj._id}
         reqObj.project = obj;
 
-        if(this.props.formRender.action  === 'new'){
+        if(this.props.formRender.action  === 'New'){
             this.props.createTask(reqObj);
             this.props.reset();
          }else{
@@ -172,6 +173,11 @@ class TaskForm extends Component{
 function validate(values){
     var error = {};
     fields.map((field) => {
+        if(field.name == 'dueDate'){
+            if(moment(values.startDate ).isAfter(values.dueDate)){
+                 error[field.name] = 'Start date should be less than end date';
+            }
+        }
         if(!values[field.name] && field.required){
             error[field.name] = 'This field is required.';
         }
@@ -185,7 +191,7 @@ function mapStateToProps(state){
         formRender : state.refreshForm,
         projects:_.isEmpty(state.project) ? [] : state.project,
         currentProject: state.selectedProject,
-        initialValues: state.refreshForm.action !== 'new' ? state.selectedTask : {project: _.isEmpty(state.selectedProject) ? null : state.selectedProject},
+        initialValues: state.refreshForm.action !== 'New' ? state.selectedTask : {project: _.isEmpty(state.selectedProject) ? null : state.selectedProject},
     }
 }
 

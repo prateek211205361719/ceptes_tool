@@ -64,9 +64,9 @@ class Sidebar extends Component{
                                 <li id="sideBarMenu" className={`dropdown ${this.state.showMenu}`}> 
                                     <a href="#" onClick={() => document.getElementById("sideBarMenu").classList.toggle('show')}> <i className="zmdi zmdi-more"></i> </a>
                                     <ul className="dropdown-menu dropdown-menu-right slideUp">
-                                        <li><a onClick={() => this.props.refreshForm(false,'Project', 'new')}  href="javascript:void(0);">Project</a></li>
-                                        <li><a onClick={() => this.props.refreshForm(false,'Milestone', 'new')}  href="javascript:void(0);">Milestone</a></li>
-                                        <li><a onClick={() => this.props.refreshForm(false,'Task')}  href="javascript:void(0);">Task</a></li>
+                                        <li><a onClick={() => this.props.refreshForm(false,'Project', 'New')}  href="javascript:void(0);">Project</a></li>
+                                        <li><a onClick={() => this.props.refreshForm(false,'Milestone', 'New')}  href="javascript:void(0);">Milestone</a></li>
+                                        <li><a onClick={() => this.props.refreshForm(false,'Task','New')}  href="javascript:void(0);">Task</a></li>
                                         <li><a onClick={() => this.props.refreshForm(false,'Users')}  href="javascript:void(0);">Users</a></li>
                                     </ul>
                                 </li>

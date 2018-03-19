@@ -9,7 +9,7 @@ import Milesstone from './components/Milesstone.js';
 import UserDashboard from './components/userdashboard';
 import ProjectDashboard from  './components/projectDashboard';
 import Task from  './components/task';
-
+import TaskDetail from './components/taskDetail';
 
 import { compose} from 'redux';
 import { connect } from 'react-redux';
@@ -38,6 +38,7 @@ class App extends Component{
                     <Route path="/user/:id"  component={UserDashboard} exact={true} />
                     <Route path="/project/:id"  component={ProjectDashboard} exact={true} />
                     <Route path="/task"  component={Task} exact={true} />
+                    <Route path="/task/:id"  component={TaskDetail} exact={true} />
                     <Route path="/milesstone"  component={Milesstone} exact={true} /> /
                     
                </div>

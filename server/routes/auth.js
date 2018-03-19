@@ -40,8 +40,8 @@ module.exports = (app) => {
             }
             res.send({project:result,users: userList, pastDueTask:await pastDueTaskList()});
         }catch(e){
-           
-            return res.status(400).send();
+            res.redirect('/login');
+            //return res.status(400).send();
         }
     });
 }; 

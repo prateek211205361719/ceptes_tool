@@ -2,7 +2,7 @@
 
 const { Milesstones }  = require('../models/milesstone');
 module.exports = (app) => {
-    app.get('/api/milestone/:projectId', async (req, res) => {
+    app.get('/api/milestone/:projectId',isUserLogin, async (req, res) => {
         try{
             var projectId = req.params.projectId;
             var milestoneList=[];
@@ -38,7 +38,7 @@ module.exports = (app) => {
     }*/
 
 
-    app.post('/api/milestone', async (req, res) => {
+    app.post('/api/milestone', isUserLogin, async (req, res) => {
         var { name, photo, _id, email} = req.user;
         var body = req.body;
         const milestone = new Milesstones(body);
@@ -56,7 +56,7 @@ module.exports = (app) => {
     });
 
 
-    app.patch('/api/milestone',async (req, res) => {
+    app.patch('/api/milestone', isUserLogin , async (req, res) => {
         console.log('------patch-------');
         var body = req.body;
         try{
@@ -70,3 +70,10 @@ module.exports = (app) => {
         }
     });
 };
+
+function  isUserLogin(req, res, next){
+    if(!req.user){
+       return res.status(400).send();
+    }
+    next();
+}

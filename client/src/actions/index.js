@@ -12,8 +12,9 @@ export const isLogin = (history) =>  async (dispatch) => {
             playload:response.data
         }); 
     }catch(e){
-        console.log(e);
-        //history.push('/login');
+       
+        //window.location.href= '/login';
+        
     }
     dispatch(hideLoading());
    
@@ -33,7 +34,8 @@ export const getUserDashBoard = (history) => async function(dispatch){
             playload:response.data.users
         });  
     }catch(e){
-        //history.push('/login');
+        console.log(e);
+       // window.location.href= '/login';
         
     }
     dispatch(hideLoading());
@@ -115,17 +117,17 @@ export const getMilesStone = (projectId) => async function(dispatch){
         });  
     }catch(e){
         console.log(e);
+        window.location.href= '/login';
     }
     dispatch(hideLoading());
 }
 
-export const createMilesStone = (milesStone) => async  function(dispatch, getState){
-    dispatch(showLoading('sectionBar'));
+export const createMilesStone = (milesStone, currentProjectId) => async  function(dispatch, getState){
     const { selectedProject } = getState();
     try{
         var result = await axios.post('/api/milestone', milesStone);
         console.log(result);
-        if(_.isEmpty(selectedProject) || selectedProject._id === milesStone.project._projectId){
+        if(_.isEmpty(currentProjectId) || currentProjectId === milesStone.project._projectId){
             dispatch({
                 type:"CREATE_MILESSTONE",
                 playload:result.data
@@ -180,5 +182,11 @@ export const createTask = (taskObj) =>  async function(dispatch){
     }catch(e){
 
     }
-    
+}
+
+export const selectedTask  = (taskObj) => {
+    return{
+        type:"SELECTED_TASK",
+        playload: taskObj
+    }
 }

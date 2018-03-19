@@ -95,7 +95,7 @@ class ProjectForm extends Component{
         var obj = Object.assign({}, value);
          obj.Users = userList;
          console.log(obj);
-         if(this.props.formRender.action  === 'new'){
+         if(this.props.formRender.action  === 'New'){
             this.props.createProject(obj);
             this.props.reset();
          }else{
@@ -159,7 +159,7 @@ function mapStateToProps(state){
         formRender : state.refreshForm,
         currentProject:state.selectedProject,
         users:state.users,
-        initialValues:state.refreshForm.action !== 'new' ? state.selectedProject : {}
+        initialValues:state.refreshForm.action !== 'New' ? state.selectedProject : {}
     }
 }
 

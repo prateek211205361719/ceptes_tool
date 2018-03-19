@@ -15,7 +15,7 @@ class Milesstone extends Component {
         sidebar.classList.add('open');
         var overlay = document.getElementById("overlay");
         overlay.style.display = "block";
-        this.props.refreshForm(false, 'Milestone', 'new');
+        this.props.refreshForm(false, 'Milestone', 'New');
        
     }
 
@@ -36,7 +36,7 @@ class Milesstone extends Component {
         sidebar.classList.add('open');
         var overlay = document.getElementById("overlay");
         overlay.style.display = "block";
-        this.props.refreshForm(false, 'Milestone', 'edit');
+        this.props.refreshForm(false, 'Milestone', 'Edit');
     }
 
     componentDidMount(){

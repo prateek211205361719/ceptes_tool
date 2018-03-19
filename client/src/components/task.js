@@ -14,7 +14,7 @@ class Task extends Component{
         sidebar.classList.add('open');
         var overlay = document.getElementById("overlay");
         overlay.style.display = "block";
-        this.props.refreshForm(false, 'Task', 'new');
+        this.props.refreshForm(false, 'Task', 'New');
        
     }
     getTask(val){

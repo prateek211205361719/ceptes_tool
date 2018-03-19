@@ -115,8 +115,8 @@ class Milesstone extends Component{
         var project = _.pick(milestone.project ,['_projectId','name','_id']);
         milestone.project  = {name:project.name, _projectId: project._projectId ? project._projectId : project._id};
         milestone._responsible = _.pick(milestone._responsible ,['name','photo','email','_userId']);
-        if(this.props.refreshMilesStoneForm.action === 'new'){
-            this.props.createMilesStone(milestone);
+        if(this.props.refreshMilesStoneForm.action === 'New'){
+            this.props.createMilesStone(milestone, this.props.currentProject._id);
             this.props.reset();
         }else{
             this.props.updateMileStone( _.omit(milestone,['index']), milestone.index);
@@ -171,7 +171,7 @@ function mapStateToProps(state){
             currentProject: state.selectedProject,
             mileStone:  state.mileStone,
             selectedMileStone: state.selectedMileStone,
-            initialValues: state.refreshForm.action !== 'new' ? state.selectedMileStone : {project: _.isEmpty(state.selectedProject) ? null : state.selectedProject},
+            initialValues: state.refreshForm.action !== 'New' ? state.selectedMileStone : {project: _.isEmpty(state.selectedProject) ? null : state.selectedProject},
            
         }
   }

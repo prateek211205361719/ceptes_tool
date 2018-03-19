@@ -27,7 +27,7 @@ class Header extends Component{
         sidebar.classList.add('open');
         var overlay = document.getElementById("overlay");
         overlay.style.display = "block";
-        this.props.refreshForm(false, 'Project', 'new');
+        this.props.refreshForm(false, 'Project', 'New');
     }
     
     showDropdown(ev){
