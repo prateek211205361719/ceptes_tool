@@ -3,9 +3,11 @@ import React,{ Component } from 'react';
 import { connect } from 'react-redux';
 import BlockHeader from './blockHeader';
 import * as action from '../actions';
+import { withRouter } from 'react-router-dom';
 class Home extends Component{
     componentDidMount(){
-        this.props.getUserDashBoard();
+        var { history } = this.props;
+        this.props.getUserDashBoard(history);
     }
     render(){
         
@@ -120,4 +122,4 @@ class Home extends Component{
 function mapStateToProps(state){
     return {auth:state.auth}
 }
-export default connect(mapStateToProps, action)(Home);
+export default connect(mapStateToProps, action)(withRouter(Home));

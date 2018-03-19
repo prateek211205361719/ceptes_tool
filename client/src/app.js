@@ -17,6 +17,7 @@ import { BrowserRouter, Route, withRouter } from 'react-router-dom';
 import * as action from './actions';
 
 import Notify from './components/notify';
+import Modal from './components/modal';
 
 class App extends Component{
     componentDidMount(){
@@ -28,11 +29,11 @@ class App extends Component{
         return(
             <BrowserRouter>
                 <div>
-                    
+                    <Route path="/login"  component={Login} />
                     <Header />
                     <MenuHeader />
                     <Sidebar />
-                    <Route path="/login"  component={Login} />
+                 
                     <Route path="/" component={Home} exact={true} />
                     <Route path="/user/:id"  component={UserDashboard} exact={true} />
                     <Route path="/project/:id"  component={ProjectDashboard} exact={true} />

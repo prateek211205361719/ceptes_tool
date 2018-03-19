@@ -9,6 +9,10 @@ const taskSchema = Schema({
         trim:true,
         minlength:1
     },
+    description:{
+        type:String,
+        required:true
+    },
     _owner:[{
         name:{
             type:String,
@@ -48,13 +52,23 @@ const taskSchema = Schema({
         type:Number,
         default:0
     },
+    priority:{
+        type:String,
+    },
     type:{
         type:String,
         default:'task'
     },
-    _projectId:{
-        type:Schema.Types.ObjectId
-    },
+    project:[{
+        name:{
+            type:String,
+            required:true,
+        },
+        _projectId:{
+            type:Schema.Types.ObjectId,
+            required :true
+        }
+    }],
     _taskId:{
         type:Schema.Types.ObjectId
     },

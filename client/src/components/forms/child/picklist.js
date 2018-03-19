@@ -5,13 +5,12 @@ class Picklist extends Component{
 
    
     render(){
-        var  {touched, error, input, changeUser, label, valueField, textfield}  = this.props;
+        var  {touched,defaultValue, error, input, changeUser, label, valueField, textfield}  = this.props;
         return(
             <div className={this.props.classProp}>
                 <label className="control-label">{label}</label> 
                 <DropdownList {...this.props.input}
                 data={this.props.data}
-               
                 placeholder={label}
                 textField={textfield}
                 valueField= {valueField}

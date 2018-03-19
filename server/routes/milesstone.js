@@ -57,13 +57,16 @@ module.exports = (app) => {
 
 
     app.patch('/api/milestone',async (req, res) => {
-        var body = req.BODY;
+        console.log('------patch-------');
+        var body = req.body;
         try{
             var body = req.body;
-            var updatedMileStone = await Milesstones.findByIdAndUpdate(body._id, body, {new: true});
-            res.send(updatedMileStone);
+            
+            var updatedMileStone = await Milesstones.findByIdAndUpdate(body._id, { $set: body}, {new: true});
+            console.log(updatedMileStone);
+             res.send(updatedMileStone);
         }catch(e){
-            return res.status(400).send(e);
+           return res.status(400).send(e);
         }
     });
 };

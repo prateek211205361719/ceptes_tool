@@ -1,10 +1,9 @@
 
 import { showLoading, hideLoading } from 'react-redux-loading-bar'
-
 import axios from 'axios';
 import _ from 'lodash';
 
-export const isLogin = () =>  async (dispatch) => {
+export const isLogin = (history) =>  async (dispatch) => {
     try{
         dispatch(showLoading());
         var response = await axios.get('/api/login');
@@ -14,29 +13,33 @@ export const isLogin = () =>  async (dispatch) => {
         }); 
     }catch(e){
         console.log(e);
+        //history.push('/login');
     }
     dispatch(hideLoading());
    
 };
 
-export const getUserDashBoard = () => async function(dispatch){
-    dispatch(showLoading());
-    var response = await axios.get('/api/userInfo');
-    dispatch( {
-        type:"GET_PROJECT",
-        playload:response.data.project
-    });
-
-    //defined in user reducers
-    dispatch( {
-        type:"GET_USERS",
-        playload:response.data.users
-    });  
+export const getUserDashBoard = (history) => async function(dispatch){
+   dispatch(showLoading());
+   try{
+        var response = await axios.get('/api/userInfo');
+        dispatch( {
+            type:"GET_PROJECT",
+            playload:response.data.project
+        });
+        //defined in user reducers
+        dispatch( {
+            type:"GET_USERS",
+            playload:response.data.users
+        });  
+    }catch(e){
+        //history.push('/login');
+        
+    }
     dispatch(hideLoading());
 };
 
 export const refreshForm = (val , type, action) => {
-   
     return({
         type:"REFRESH_FORM",
         playload:{refreshForm: val, type:type, action:action}
@@ -59,7 +62,6 @@ export const resetSelectedProject = () => {
 
 //defined in project reducers
 export const createProject = (projectObj) => async function(dispatch){
-   
     dispatch(showLoading('sectionBar'));
     try{
         var result = await axios.post('/api/projects', projectObj);
@@ -147,14 +149,14 @@ export const updateMileStone = (mileStoneObj, index) => async function(dispatch)
             playload: result.data
         });
     }catch(e){
-
+       console.log(e);
     }
     dispatch(hideLoading('sectionBar'));
 }
 
 
 export const getTask = (type, projectId) => async function(dispatch){
-   // dispatch(showLoading());
+    dispatch(showLoading());
     try{
          var result = await axios.get(`/api/tasks/${projectId}?type=${type}`);
          dispatch({
@@ -166,6 +168,17 @@ export const getTask = (type, projectId) => async function(dispatch){
         console.log(e);
        
     }
-    //dispatch(hideLoading());
+    dispatch(hideLoading());
  
+}
+
+
+export const createTask = (taskObj) =>  async function(dispatch){
+    try{
+        var result = await axios.post('/api/tasks', taskObj);
+        console.log(result);
+    }catch(e){
+
+    }
+    
 }

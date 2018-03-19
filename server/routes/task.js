@@ -1,8 +1,11 @@
-
+const moment = require('moment');
 const { Tasks } = require('../models/task');
+const { userPastDueTaskList } = require('../helper/taskHelper');
 module.exports =  (app) => {
 
     app.get('/api/tasks/:projectId', async (req, res) => {
+        //const todayDatetime = moment(Date.now()).format('YYYY-MM-DDTHH:MM:SS.sss');
+        const todayDatetime = Date.now();
         var type = req.query.type;
         var projectId = req.params.projectId;
         var userId = req.user._id;
@@ -50,10 +53,10 @@ module.exports =  (app) => {
     //To create a task
     app.post('/api/tasks', async (req, res) => {
             try{
-                //var { name, photo, _id} = req.user;
+                var { name, photo, _id} = req.user;
                 var body = req.body;
                 var task = new Tasks(body);
-                //task.__owner = {name, photo, _userId:_id};
+                task.__owner = {name, photo, _userId:_id};
                 var newtask =  await task.save();
                 res.send(newtask);
             }catch(e){

@@ -6,7 +6,8 @@ const projectSchema = Schema({
         type:String,
         required:true,
         trim:true,
-        minlength:1
+        minlength:1,
+       
     },
     _owner:{
         type:Schema.Types.ObjectId,

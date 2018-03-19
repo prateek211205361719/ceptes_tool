@@ -14,7 +14,7 @@ module.exports = {
 
        // console.log(taskJSON);
 
-
+        console.log(taskJSON);
         try {
             var fetchedPastDueTaskList = Tasks.find(taskJSON);
                 

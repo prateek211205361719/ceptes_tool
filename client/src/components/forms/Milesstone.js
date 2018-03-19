@@ -8,7 +8,7 @@ import momentLocaliser from "react-widgets-moment";
 import { connect } from 'react-redux';
 import * as action from '../../actions';
 import _ from 'lodash';
-import Picklist from './picklist';
+import Picklist from './child/picklist';
 
 const renderField = ({ input, label, type,classProp, meta: { touched, error ,pristine, dirty} }) => (
     <div className={classProp}>
@@ -35,12 +35,7 @@ const renderDateTimePicker = ({ classProp, label, input: { onChange, value }, sh
     />
      {touched && error && <span style={{"color":"#FF3636","fontSize":"12px"}}>{error}</span>}
   </div>
-
-
-
-
-
-const fields= [
+  const fields= [
     {
       name: 'name',
       label: 'Milesstone Name',
@@ -78,7 +73,7 @@ class Milesstone extends Component{
             {name:'name',label:'Milesstone Name',class:'col-sm-12',required:true,type:'text',component:renderField},
             {name:'startDate',label:'Start Date',class:'col-sm-6',showTime:false,component:renderDateTimePicker},
             {name:'endDate',label:'End Date',class:'col-sm-6',required:true,showTime:false,component:renderDateTimePicker},
-            {name:'project', textfield:"name", valueField:"_id", label:'Select Project', class:'col-sm-12', component:Picklist, data:this.props.projects},
+            {name:'project', textfield:"name", valueField:"_projectId", label:'Select Project', class:'col-sm-12', component:Picklist, data:this.props.projects},
             {name:'_responsible',textfield:"email",valueField:"_userId",label:'Select Users',class:'col-sm-12', component:Picklist, data:this.props.currentProject.Users}]
         }  
         if(!_.isEmpty(this.props.selectedMileStone)){
@@ -115,16 +110,15 @@ class Milesstone extends Component{
     }
    
     createMilesStone(value){
-       
+        console.log(value);
         var milestone = _.pick(value, ['name','startDate','endDate','project','_responsible','_id','index']);
-        var project = _.pick(milestone.project ,['_id','name']);
-        milestone.project  = {name:project.name, _projectId:project._id};
+        var project = _.pick(milestone.project ,['_projectId','name','_id']);
+        milestone.project  = {name:project.name, _projectId: project._projectId ? project._projectId : project._id};
         milestone._responsible = _.pick(milestone._responsible ,['name','photo','email','_userId']);
         if(this.props.refreshMilesStoneForm.action === 'new'){
-             this.props.createMilesStone(milestone);
-             this.props.reset();
+            this.props.createMilesStone(milestone);
+            this.props.reset();
         }else{
-           
             this.props.updateMileStone( _.omit(milestone,['index']), milestone.index);
         }
       

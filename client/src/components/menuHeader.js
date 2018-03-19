@@ -15,7 +15,7 @@ class MenuHeader extends Component{
                             <Link to={ _.isEmpty(this.props.selectedProject) ? '/' : `/project/${this.props.selectedProject._id}`}>Dashboard</Link>
                         </li>
                         <li className="menu-dropdown-icon">
-                            <Link to="/milesstone">Milesstone</Link>
+                            <Link to="/milesstone">Milestone</Link>
                         </li>
                         <li className="menu-dropdown-icon">
                              <Link to="/task">Task</Link>

@@ -7,7 +7,7 @@ import moment from 'moment';
 import momentLocaliser from "react-widgets-moment";
 import 'react-widgets/dist/css/react-widgets.css';
 import { connect } from 'react-redux';
-import ProjectMultiselect  from './multiselect';
+import ProjectMultiselect  from './child/multiselect';
 import * as action from '../../actions';
 import _ from 'lodash';
 momentLocaliser(moment);

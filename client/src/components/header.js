@@ -58,11 +58,6 @@ class Header extends Component{
                                 </a>
                             </div>
                         </li>
-                        <li className="hidden-md-down">
-                            <a href="events.html" title="Events">
-                                <i className="zmdi zmdi-calendar"></i>
-                            </a>
-                        </li>
                         <li className="dropdown">
                             <a href="#" onClick={(ev) => this.showDropdown(ev)} className="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                 <i className="zmdi zmdi-notifications" />

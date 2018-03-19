@@ -5,20 +5,19 @@ import { connect }  from 'react-redux';
 import { Link } from 'react-router-dom';
 import {withRouter} from "react-router-dom";
 import * as action from '../../actions';
+import _ from 'lodash';
 class HeaderProject extends Component{
     
     changeToProjectPath(projectId){
 
         var index1;
         var path = `/project/${projectId}`;
-        var selectedProject =  this.props.project.filter((item, index) => {
-            if(item._id ===  projectId){
-                index1 = index;
-                return item;
-            }
-        })[0];
-        this.props.selectedProject(selectedProject, index1);
-        this.props.history.push(path);
+        var index = _.findIndex(this.props.project, {_id: projectId});
+        if(index > -1){
+            var selectedProject  = [].concat(this.props.project);
+            this.props.selectedProject(selectedProject[index], index1);
+            this.props.history.push(path);
+        }
     }
    
     renderContent(){
