@@ -10,7 +10,7 @@ class MenuHeader extends Component{
         return(
             <div className="menu-container">
                 <div className="menu">
-                    <ul className="pullDown">
+                    <ul className="pullDown" id="menuSidebar">
                         <li className="menu-dropdown-icon">
                             <Link to={ _.isEmpty(this.props.selectedProject) ? '/' : `/project/${this.props.selectedProject._id}`}>Dashboard</Link>
                         </li>

@@ -35,7 +35,7 @@ export const getUserDashBoard = (history) => async function(dispatch){
         });  
     }catch(e){
         console.log(e);
-       // window.location.href= '/login';
+        window.location.href= '/login';
         
     }
     dispatch(hideLoading());

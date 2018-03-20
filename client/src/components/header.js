@@ -29,6 +29,12 @@ class Header extends Component{
         overlay.style.display = "block";
         this.props.refreshForm(false, 'Project', 'New');
     }
+
+    openMenuSidebar(){
+        var menuSidebar = document.getElementById("menuSidebar");
+        menuSidebar.classList.toggle("show-on-mobile");
+       // alert("hello");
+    }
     
     showDropdown(ev){
         if(ev.target.parentNode.tagName  === 'A'){
@@ -52,7 +58,7 @@ class Header extends Component{
                     <ul className="nav navbar-nav navbar-left">
                         <li>
                             <div className="navbar-header">
-                                <a href="#" className="h-bars"></a>
+                                <a href="#" onClick={this.openMenuSidebar.bind(this)} className="h-bars"></a>
                                 <a className="navbar-brand" href="#" onClick={this.changePath.bind(this)}>
                                     <span className="m-l-10">Ceptes Tool</span>
                                 </a>
