@@ -1,6 +1,6 @@
 
 import React, { Component } from 'react';
-
+import CommentBox from './commentBox';
 class Comment extends Component{
     render(){
         return(
@@ -26,16 +26,7 @@ class Comment extends Component{
                             </ul>
                         </div>
                         <div className="footer">
-                            <div className="chat-message clearfix">
-                                <div className="input-group p-t-15">
-                                    <input type="text" class="form-control" placeholder="Enter text here..." />
-                                    <span className="input-group-addon">
-                                        <i className="zmdi zmdi-mail-send"></i>
-                                    </span>
-                                </div>
-                                <a href="javascript:void(0);" class="btn btn-raised btn-warning btn-round"><i class="zmdi zmdi-camera"></i></a>
-                                <a href="javascript:void(0);" class="btn btn-raised btn-info btn-round"><i class="zmdi zmdi-file-text"></i></a>                            
-                            </div>
+                                <CommentBox />
                          </div>
                     </div>
                 </div>

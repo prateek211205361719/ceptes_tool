@@ -12,7 +12,9 @@ module.exports =  (app) => {
         var reqParam = {};
         reqParam["$and"] = [];
 
-        if (projectId !== 'undefined' && type !== 'All') {
+        console.log('project id - '+projectId);
+
+        if (projectId !== 'undefined') {
             reqParam["$and"].push({"project._projectId": projectId});
         }
 
@@ -21,9 +23,10 @@ module.exports =  (app) => {
         if (type !== 'undefined') {
             switch(type) {
                 case 'Past Due': reqParam["$and"].push({"dueDate": { $lt: todayDatetime }});
+                                reqParam["$and"].push({"status": { $ne: 'Completed' }});
                                 break;
-                case 'Pending': reqParam["$and"].push({"status": { $eq: 'Pending'}});
-                                break;
+                case 'Pending': reqParam["$and"].push({"status": { $in: ['In Progress', 'Open']}});
+                break;
                 case 'Completed': reqParam["$and"].push({"status": { $eq: 'Completed'}});
                                 break;
                 default: break;
@@ -105,6 +108,49 @@ module.exports =  (app) => {
             var fetchedTasks = await Tasks.find({"assignedUsers._userId": "5a9d114ffb9d866cbe9e6f1b"});
             
             console.log('-- fetchedTasks -- '+fetchedTasks);
+            res.send(fetchedTasks);
+        } catch (error) {
+            res.status(400).send(error)
+        }
+    });
+
+    // Fetch issues related to the user
+
+    app.post('/api/getUsersIssues', async (req, res) => {
+        // req.body should contain 
+        // {
+        //     "assignedUsers._userId" : "5a9d114ffb9d866cbe9e6f1b",
+        //     "type": {"$ne": "task"}
+        // }
+        var userInfo = req.body;
+
+        try {
+            var fetchedTasks = await limitedUserTaskList(userInfo, 5);
+            res.send(fetchedTasks);
+        } catch (error) {
+            res.status(400).send(error)
+        }
+    });
+
+    
+    // Fetch issues related to the user
+
+    app.post('/api/todayPendingTasks', async (req, res) => {
+        // req.body should contain 
+        // {
+        //     "assignedUsers._userId" : "5a9d114ffb9d866cbe9e6f1b",
+        //     "dueDate": todayDatetime
+        // }
+        var userInfo = req.body;
+        // userInfo["dueDate"] = todayDatetime;
+
+        var dateJSON = {};
+        dateJSON["$eq"] = todayDatetime;
+
+        userInfo.dueDate = dateJSON;
+        console.log(userInfo);
+        try {
+            var fetchedTasks = await limitedUserTaskList(userInfo, 5);
             res.send(fetchedTasks);
         } catch (error) {
             res.status(400).send(error)

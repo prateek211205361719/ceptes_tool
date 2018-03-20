@@ -1,20 +1,10 @@
-
 const mongoose = require('mongoose');
 const { Tasks } = require('../models/task');
 
 
 module.exports = {
     userPastDueTaskList: (taskJSON) => {
-        //console.log('todayDatetime -- '+todayDatetime);
-        
-
-        // console.log(taskJSON.myname);
-
-        //var taskJSON = JSON.stringify(taskJSON);
-
-       // console.log(taskJSON);
-
-        console.log(taskJSON);
+        console.log(taskJSON.status);
         try {
             var fetchedPastDueTaskList = Tasks.find(taskJSON);
                 
@@ -23,4 +13,12 @@ module.exports = {
             return error;
         }
     },
+    limitedUserTaskList: (taskJSON, recLimit) => {
+        try {
+            var fetchedTasks = Tasks.find(taskJSON).limit(recLimit);
+            return fetchedTasks;
+        } catch (error) {
+            return error;
+        }
+    }
 };

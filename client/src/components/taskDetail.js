@@ -97,7 +97,7 @@ class TaskDetail extends Component{
                                             this.state.tabs.map((item) => {
                                                 return(
                                                   <li className="nav-item">
-                                                    <a href="#" className={`nav-link ${item.class}`} onClick={this.renderTab.bind(this, item.label)}>{item.label}</a>
+                                                    <a href="javascript:void(0);" className={`nav-link ${item.class}`} onClick={this.renderTab.bind(this, item.label)}>{item.label}</a>
                                                   </li>    
                                                 );                                          
                                             })

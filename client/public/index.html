@@ -105,6 +105,55 @@
         height:100px;
       }
       .progressbar-red .CircularProgressbar-path { stroke: #f66 !important; }
+      .btn-file {
+        position: relative;
+        overflow: hidden;
+      }
+      .btn-file input[type=file] {
+        position: absolute;
+        top: 0;
+        right: 0;
+        min-width: 100%;
+        min-height: 100%;
+        font-size: 100px;
+        text-align: right;
+        filter: alpha(opacity=0);
+        opacity: 0;
+        outline: none;   
+        cursor: inherit;
+        display: block;
+      }
+       .file .hover {
+        position: absolute;
+        right: 0px;
+        top: 0px;
+        display: none;
+        transition: all 0.2s ease-in-out;
+      }
+      .file:hover .hover{
+        display: block;
+      } 
+     
+      .file .icon {
+        height: 150px;
+        line-height:100px;
+        overflow: hidden;
+        background-size: cover;
+        background-position: top;
+      }
+
+       .file .icon {
+        padding: 15px 10px;
+        display: table;
+        width: 100%;
+        text-align: center;
+       
+      }
+     .file .file-name {
+      padding: 10px;
+      border-top: 1px solid #eceff1;
+    }
+
       @media (max-width: 500px){
       .leftIcon {
         left: 0 !important; 
