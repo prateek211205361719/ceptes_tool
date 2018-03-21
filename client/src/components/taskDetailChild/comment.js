@@ -32,11 +32,18 @@ class Comment extends Component{
                                                              </span> 
                                                             <span className="large">Now</span>
                                                         </time>
-                                                        <div className="cbp_tmicon">
-                                                             <a href="javascript:void(0)" className="imagePopover"><img className="imagePopover" width="50" src={item._owner[0].photo} style={{"borderRadius": "50%"}} /></a>
+                                                        <div className="cbp_tmicon" style={{"background":"none","fontSize":0}}>
+                                                             <a href="javascript:void(0)"><img  width="50" src={item._owner[0].photo} style={{"borderRadius": "50%"}} /></a>
                                                         </div>
                                                         <div className="cbp_tmlabel"> 
                                                             <p>{item.description}</p>
+                                                            <div className="row">
+                                                                {
+                                                                    item._files.map((rec) => {
+                                                                        return <div style={{"wordWrap":"break-word"}} className="col-sm-6 col-lg-4 m-t-10"><a href="#">{rec.filename}</a></div>
+                                                                    })
+                                                                }
+                                                            </div>
                                                         </div>
                                                     </li>
                                             );

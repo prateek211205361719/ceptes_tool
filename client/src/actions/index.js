@@ -13,7 +13,7 @@ export const isLogin = (history) =>  async (dispatch) => {
         }); 
     }catch(e){
        
-        //window.location.href= '/login';
+        window.location.href= '/login';
         
     }
     dispatch(hideLoading());
@@ -192,13 +192,14 @@ export const selectedTask  = (taskObj) => {
 }
 
 export const getComment = (taskId) => async function(dispatch){
-   
+    dispatch(showLoading());
     var result = await axios.get(`/api/comment/${taskId}`);
     console.log(result);
     dispatch({
         type:"GET_COMMENT",
         playload:result.data
     }); 
+    dispatch(hideLoading());
 }
 
 

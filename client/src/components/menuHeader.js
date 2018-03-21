@@ -24,7 +24,7 @@ class MenuHeader extends Component{
                     </ul>
                 </div>
                 <header>
-                     <LoadingBar style={{ backgroundColor: 'rgb(236, 238, 239)'}}  />
+                     <LoadingBar style={{ backgroundColor: '#d9534f'}}  />
                 </header>
             </div>
         );
