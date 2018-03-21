@@ -1,9 +1,8 @@
 var multer  = require('multer');
 const { Comment }  = require('../models/comment');
 const _ = require("lodash");
-
-
-
+const fs = require("fs");
+const gridfs = require('gridfs-stream');
 const storage = require('multer-gridfs-storage')({
     url: 'mongodb://prateek211205:sanu211205@ds163053.mlab.com:63053/feedback_dev',
     file: (req, file) => {
@@ -15,7 +14,7 @@ const storage = require('multer-gridfs-storage')({
   
 });
 const upload = multer({ storage: storage });
-module.exports = (app) => {
+module.exports = (app, connection) => {
     app.post('/api/comment', upload.array('photo', 12), async (req, res, next)  => {
        // console.log(req.body.description);
       var fileList = [];
@@ -40,4 +39,18 @@ module.exports = (app) => {
          var commentList = await Comment.find({_taskId: req.params.taskId}).sort([['created_at', 'ascending']]); ;
          res.send(commentList);
     });
+
+    app.get('/api/comment/readfile/:fileid', (req, res) => {
+            var gfs = gridfs(connection.db);
+            gfs.exist({ _id: req.params.fileid }, function (err, file) {
+                if (err || !file) {
+                    res.send('File Not Found');
+                } else {
+                    var readstream = gfs.createReadStream({ _id: req.params.fileid  });
+                    readstream.pipe(res);
+                }
+            });
+    
+    });
+    
 };

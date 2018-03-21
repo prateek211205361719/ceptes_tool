@@ -4,8 +4,18 @@ import CommentBox from './commentBox';
 import Moment from 'react-moment';
 import { connect } from 'react-redux';
 import * as action from '../../actions';
+import FilePreview from '../userdashboardChild/filePreview';
 class Comment extends Component{
    
+    state = {showPreview: false,fileId:''};
+
+    showPreview(fileId){
+       
+        this.setState({showPreview: true, fileId:fileId});
+    }
+    closeModal(){
+        this.setState({showPreview: false, fileId:''});
+    }
     componentDidMount(){
         this.props.getComment(this.props.currentTask._id);
     }
@@ -13,7 +23,9 @@ class Comment extends Component{
 
         console.log(this.props.comment);
         return(
-              <div className="container-fluid">
+          
+              <div  className="container-fluid">
+                <FilePreview closeModal={this.closeModal.bind(this)} showModal={this.state.showPreview} fileId={this.state.fileId} />
                 <div className="row clearfix">
                     <div className="col-lg-12">
                         <div className="card">
@@ -40,7 +52,7 @@ class Comment extends Component{
                                                             <div className="row">
                                                                 {
                                                                     item._files.map((rec) => {
-                                                                        return <div style={{"wordWrap":"break-word"}} className="col-sm-6 col-lg-4 m-t-10"><a href="#">{rec.filename}</a></div>
+                                                                        return <div style={{"wordWrap":"break-word"}} className="col-sm-6 col-lg-4 m-t-10"><a href="javascript:void(0)" onClick={this.showPreview.bind(this, rec._fileId)}>{rec.filename}</a></div>
                                                                     })
                                                                 }
                                                             </div>

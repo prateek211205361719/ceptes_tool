@@ -8,8 +8,11 @@ var cookieSession = require('cookie-session');
 const mongoose = require('mongoose');
 const passport = require('passport');
 
-const keys = require('./server/config/keys');
+var gridfs = require('gridfs-stream');
+gridfs.mongo = mongoose.mongo;
+var connection = mongoose.connection;
 
+const keys = require('./server/config/keys');
 mongoose.connect(keys.mongoURI);
 const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -36,7 +39,7 @@ require('./server/routes/project')(app);
 require('./server/routes/milesstone')(app);
 require('./server/routes/tasklist')(app);
 require('./server/routes/task')(app);
-require('./server/routes/comment')(app);
+require('./server/routes/comment')(app, connection);
 
 
 // code to push production

@@ -30,14 +30,14 @@ class App extends Component{
             <BrowserRouter>
                 <div>
                     <Route path="/login"  component={Login} />
+                   
                     <Header />
                     <MenuHeader />
                     <Sidebar />
-                 
                     <Route path="/" component={Home} exact={true} />
                     <Route path="/user/:id"  component={UserDashboard} exact={true} />
                     <Route path="/project/:id"  component={ProjectDashboard} exact={true} />
-                    <Route path="/task"  component={Task} exact={true} />
+                     <Route path="/task"  component={Task} exact={true} />
                     <Route path="/task/:id"  component={TaskDetail} exact={true} />
                     <Route path="/milesstone"  component={Milesstone} exact={true} /> /
                     
