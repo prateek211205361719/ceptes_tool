@@ -7,8 +7,8 @@ import _ from 'lodash';
 import * as action from '../../actions';
 import { withRouter } from 'react-router-dom';
 class TaskRecord extends Component{
+   
     state= {thead:[{label:'Name'},{label:'Priority'},{label:'Start Date'},{label:'End Date'},{label:'status'},{label:'Project'}]};
-    
     taskRedirect(taskId){
         var index = _.findIndex(this.props.tasks, {_id: taskId});
         if(index > -1){

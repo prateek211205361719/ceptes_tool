@@ -56,30 +56,30 @@ class TaskDetail extends Component{
                                 <div className="card">
                                     <div className="tab-content">
                                         <div className="tab-pane body active">
-                                            <small class="text-muted">Project: </small>
+                                            <small className="text-muted">Project: </small>
                                             <p>
                                                 <a href="#" onClick={this.changeToProjectPath.bind(this, currentTask.project[0]._projectId)}> 
                                                     {currentTask.project[0].name}
                                                 </a>  
                                             </p>  
                                              <hr/>
-                                             <small class="text-muted">Description: </small>
+                                             <small className="text-muted">Description: </small>
                                              <p>{currentTask.description}</p>
                                              <hr/>
-                                             <small class="text-muted">Priority: </small>
+                                             <small className="text-muted">Priority: </small>
                                                 <p>{currentTask.priority}</p>
                                              <hr/>
-                                             <small class="text-muted">Status: </small>
+                                             <small className="text-muted">Status: </small>
                                                 <p>{currentTask.status}</p>
                                              <hr/>
-                                             <small class="text-muted">Start Date: </small>
+                                             <small className="text-muted">Start Date: </small>
                                                 <p>
                                                     <Moment format="YYYY/MM/DD">
                                                         {currentTask.startDate} 
                                                     </Moment>
                                                 </p>
                                              <hr/>
-                                            <small class="text-muted">Due Date: </small>
+                                            <small className="text-muted">Due Date: </small>
                                             <p>
                                                 <Moment format="YYYY/MM/DD">
                                                 {currentTask.dueDate} 
@@ -94,9 +94,9 @@ class TaskDetail extends Component{
                                 <div className="card">
                                     <ul className="nav nav-tabs">
                                         {
-                                            this.state.tabs.map((item) => {
+                                            this.state.tabs.map((item, index) => {
                                                 return(
-                                                  <li className="nav-item">
+                                                  <li className="nav-item" key={`taskTabs${index}`}>
                                                     <a href="javascript:void(0);" className={`nav-link ${item.class}`} onClick={this.renderTab.bind(this, item.label)}>{item.label}</a>
                                                   </li>    
                                                 );                                          

@@ -1,40 +1,69 @@
 
 import React, { Component } from 'react';
 import CommentBox from './commentBox';
+import Moment from 'react-moment';
+import { connect } from 'react-redux';
+import * as action from '../../actions';
 class Comment extends Component{
+   
+    componentDidMount(){
+        this.props.getComment(this.props.currentTask._id);
+    }
     render(){
+
+        console.log(this.props.comment);
         return(
-            <div className="container-fluid">
-            <div className="row clearfix">
-                <div className="col-lg-12">
-                    <div className="card">
-                        <div className="body">
-                            <ul className="cbp_tmtimeline"> 
-                                <li>
-                                    <time className="cbp_tmtime">
-                                        <span className="hidden">25/12/2017</span> 
-                                        <span className="large">Now</span>
-                                    </time>
-                                    <div className="cbp_tmicon">
-                                         <a href="#" class="imagePopover"><img class="imagePopover" width="30" src="https://lh6.googleusercontent.com/-t4eBb5fKAd4/AAAAAAAAAAI/AAAAAAAAAFs/QbLmWiT4nf8/photo.jpg?sz=50" alt="" style={{"width": "50px", "border-radius": "50%"}} /></a>
-                                    </div>
-                                    <div className="cbp_tmlabel"> 
-                                        <h2><a href="javascript:void(0);">Art Ramadani</a> <span>posted a status update</span></h2>
-                                        <p>Tolerably earnestly middleton extremely distrusts she boy now not. Add and offered prepare how cordial two promise. Greatly who affixed suppose but enquire compact prepare all put. Added forth chief trees but rooms think may.</p>
-                                    </div>
-                                </li>
-                            </ul>
+              <div className="container-fluid">
+                <div className="row clearfix">
+                    <div className="col-lg-12">
+                        <div className="card">
+                            <div className="body">
+                                <ul className="cbp_tmtimeline"> 
+                                    {
+                                        this.props.comment.map((item, index) => {
+                                            return(
+                                                    <li key={`commentItem${index}`}>
+                                                        <time className="cbp_tmtime">
+                                                            <span className="hidden">
+                                                                <Moment format="YYYY/MM/DD">
+                                                                    {item.created_at}
+                                                                </Moment>
+                                                           
+                                                             </span> 
+                                                            <span className="large">Now</span>
+                                                        </time>
+                                                        <div className="cbp_tmicon">
+                                                             <a href="javascript:void(0)" className="imagePopover"><img className="imagePopover" width="50" src={item._owner[0].photo} style={{"borderRadius": "50%"}} /></a>
+                                                        </div>
+                                                        <div className="cbp_tmlabel"> 
+                                                            <p>{item.description}</p>
+                                                        </div>
+                                                    </li>
+                                            );
+                                        })  
+                                    }
+                                    
+                                </ul>
+                            </div>
+                            <div className="footer">
+                                    <CommentBox />
+                            </div>
                         </div>
-                        <div className="footer">
-                                <CommentBox />
-                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
+          </div>
         );
     }
 
 }
 
-export default Comment;
+function mapStateToProps(state){
+    return{
+        comment: state.comment,
+        currentTask : state.selectedtask
+
+    }
+    
+}
+
+export default connect(mapStateToProps, action)(Comment);

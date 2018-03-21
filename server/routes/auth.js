@@ -47,7 +47,7 @@ module.exports = (app) => {
 }; 
 
 function  isUserLogin(req, res, next){
-    console.log("-----middleware----");
+  
     if(!req.user){
        return res.status(400).send();
     }

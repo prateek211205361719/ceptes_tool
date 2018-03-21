@@ -33,6 +33,9 @@ class ImageBox extends Component{
                                         <p className="m-b-5 text-muted" style={{"wordWrap":"break-word"}}>{item.name}</p>
                                         <small>Size: {item.size/(1000)} MB</small>
                                     </div>
+                                    <div className="progress m-b-5">
+                                        <div style={{"transition":"width 1s"}} id={`progress${index}`} className="progress-bar progress-bar-success"> <span className="sr-only">40% Complete (success)</span> </div>
+                                    </div>
                               </a>
                         </div>
                      </div>

@@ -190,3 +190,29 @@ export const selectedTask  = (taskObj) => {
         playload: taskObj
     }
 }
+
+export const getComment = (taskId) => async function(dispatch){
+   
+    var result = await axios.get(`/api/comment/${taskId}`);
+    console.log(result);
+    dispatch({
+        type:"GET_COMMENT",
+        playload:result.data
+    }); 
+}
+
+
+export const createComment = (commentObject) => {
+    return{
+        type:'CREATE_COMMENT',
+        playload: commentObject
+
+    }
+}
+
+export const showLodingProgress = (commentObject) => function(dispatch){
+    dispatch(showLoading());
+}
+export const hideLodingProgress = (commentObject) => function(dispatch){
+    dispatch(hideLoading());
+}
