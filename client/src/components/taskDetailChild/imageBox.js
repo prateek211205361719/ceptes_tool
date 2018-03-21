@@ -34,7 +34,7 @@ class ImageBox extends Component{
                                         <small>Size: {item.size/(1000)} MB</small>
                                     </div>
                                     <div className="progress m-b-5">
-                                        <div style={{"transition":"width 1s"}} id={`progress${index}`} className="progress-bar progress-bar-success"> <span className="sr-only">40% Complete (success)</span> </div>
+                                        <div style={{"transition":"width 1s"}}  className="progressComment progress-bar progress-bar-success"> <span className="sr-only">40% Complete (success)</span> </div>
                                     </div>
                               </a>
                         </div>

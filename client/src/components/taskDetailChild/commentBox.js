@@ -33,8 +33,13 @@ class CommentBox extends Component{
             var result = await axios.post('/api/comment', formData,{
                 onUploadProgress: function (progressEvent) {
                     console.log(progressEvent);
-                    //document.getElementById("progress0").style.width = ((progressEvent.loaded/progressEvent.total)*100)+"%";
+                    var progressClassList = document.getElementsByClassName("progressComment progress-bar progress-bar-success");
+                     _.forEach(progressClassList, (obj) => {
+                        obj.style.width = (((progressEvent.loaded/progressEvent.total)*100) - 2)+"%";
+                    });
+                    
                 }
+                
             });
             if(result){
                
