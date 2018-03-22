@@ -19,7 +19,7 @@ import * as action from './actions';
 import Notify from './components/notify';
 import Modal from './components/modal';
 const socketIOClient = require('socket.io-client')  
-window.socket = socketIOClient.connect('http://localhost:5000');
+window.socket = socketIOClient.connect('https://ceptestool.herokuapp.com');
 
 class App extends Component{
     constructor(){
