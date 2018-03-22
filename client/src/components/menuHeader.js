@@ -5,20 +5,30 @@ import { connect }  from 'react-redux';
 import { Link } from 'react-router-dom';
 import _ from 'lodash';
 import LoadingBar from 'react-redux-loading-bar';
+import { withRouter } from 'react-router-dom';
 class MenuHeader extends Component{
+    hideMenu(){
+
+    }
+    redirectURL(url){
+        this.props.history.push(url);
+        var menuSidebar = document.getElementById("menuSidebar");
+        menuSidebar.classList.toggle("show-on-mobile");
+    }
     render(){
+        var {selectedProject} = this.props;
         return(
             <div className="menu-container">
                 <div className="menu">
                     <ul className="pullDown" id="menuSidebar">
                         <li className="menu-dropdown-icon">
-                            <Link to={ _.isEmpty(this.props.selectedProject) ? '/' : `/project/${this.props.selectedProject._id}`}>Dashboard</Link>
+                            <a href="javascript:void(0);"  onClick={this.redirectURL.bind(this, _.isEmpty(selectedProject) ? '/' : `/project/${this.props.selectedProject._id}`)}>Dashboard</a>
                         </li>
                         <li className="menu-dropdown-icon">
-                            <Link to="/milesstone">Milestone</Link>
+                            <a href="javascript:void(0);" onClick={this.redirectURL.bind(this,'/milesstone')}>Milestone</a>
                         </li>
                         <li className="menu-dropdown-icon">
-                             <Link to="/task">Task</Link>
+                             <a  href="javascript:void(0);" onClick={this.redirectURL.bind(this,'/task')}>Task</a>
                         
                         </li>
                     </ul>
@@ -37,4 +47,4 @@ function mapStateToProps(state){
         selectedProject: state.selectedProject
     }
 }
-export default connect(mapStateToProps, null)(MenuHeader);
+export default connect(mapStateToProps, null)(withRouter(MenuHeader));

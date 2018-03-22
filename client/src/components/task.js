@@ -9,6 +9,10 @@ import _ from 'lodash';
 class Task extends Component{
     state = {tabs:[{label:'Past Due',class:'active'},{label:'Pending',class:''},{label:'Completed', class:''},{label:'All', class:''}]};
     
+    componentDidMount(){
+          this.props.getTask(_.find(this.state.tabs, { 'class': 'active'}).label, this.props.currentProject._id);
+    }
+
     openSidebar(){
         var sidebar = document.getElementById("sidebar");
         sidebar.classList.add('open');
@@ -23,10 +27,7 @@ class Task extends Component{
         this.props.getTask(val, this.props.currentProject._id);
     }
 
-    componentDidMount(){
-        this.props.getTask(_.find(this.state.tabs, { 'class': 'active'}).label, this.props.currentProject._id);
-    }
-
+   
     render(){
         var {auth , currentProject} = this.props;
         var header = '';

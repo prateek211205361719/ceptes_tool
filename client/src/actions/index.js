@@ -11,8 +11,10 @@ export const isLogin = (history) =>  async (dispatch) => {
             type:"IS_LOGIN",
             playload:response.data
         }); 
+        if(!response.data){
+            window.location.href= '/login';
+        }
     }catch(e){
-       
         window.location.href= '/login';
         
     }
@@ -21,6 +23,7 @@ export const isLogin = (history) =>  async (dispatch) => {
 };
 
 export const getUserDashBoard = (history) => async function(dispatch){
+  
    dispatch(showLoading());
    try{
         var response = await axios.get('/api/userInfo');

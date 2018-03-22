@@ -55,8 +55,7 @@ class Header extends Component{
             <div>
                 
                 <nav className="navbar p-l-5 p-r-5">
-                
-                    <ul className="nav navbar-nav navbar-left">
+                     <ul className="nav navbar-nav navbar-left">
                         <li>
                             <div className="navbar-header">
                                 <a href="#" onClick={this.openMenuSidebar.bind(this)} className="h-bars"></a>

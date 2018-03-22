@@ -3,7 +3,12 @@ import React,{Component} from 'react';
 import './imageModal.css';
 class FilePreview extends Component{
 
-    
+    componentDidMount(){
+       /* var iframe = document.querySelector("iframe");
+        var doc = iframe.contentDocument;
+        var child = doc.childNodes[0].children;
+        child[1].style.textAlign = "center";*/
+    }
     closeModal(){
         this.props.closeModal();
      }

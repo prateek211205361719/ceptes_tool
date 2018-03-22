@@ -6,6 +6,7 @@ import * as action from '../actions';
 import { withRouter } from 'react-router-dom';
 class Home extends Component{
     componentDidMount(){
+      
         var { history } = this.props;
         this.props.getUserDashBoard(history);
     }
