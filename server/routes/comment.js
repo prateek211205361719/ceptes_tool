@@ -22,7 +22,6 @@ module.exports = (app, connection) => {
             var { filename, uploadDate, id} = item;
             fileList.push({ filename, uploadDate, _fileId:id});
         })
-        console.log(req.files);
         var { name, photo, _id, email} = req.user;
         var comment = new Comment({
             description: req.body.description,
@@ -32,11 +31,18 @@ module.exports = (app, connection) => {
          comment._owner = {name, photo,email, _userId: _id};
          comment._files = fileList;
          var newComment  = await comment.save();
+         /*res.io.on('connection', function(socket){
+            socket.emit("message", newComment);
+           
+         });*/
+         res.io.emit("message", newComment);
+       
          res.send(newComment);
     });
 
     app.get('/api/comment/:taskId', async (req, res) => {
          var commentList = await Comment.find({_taskId: req.params.taskId}).sort([['created_at', 'ascending']]); ;
+        
          res.send(commentList);
     });
 

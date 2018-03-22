@@ -29,13 +29,12 @@ class CommentBox extends Component{
             _.forEach(fileList, (eachFile) => {
                 formData.append("photo", eachFile, eachFile.name);
             });
-
+            var progressClassList = document.getElementsByClassName("progressComment progress-bar progress-bar-success");
             var result = await axios.post('/api/comment', formData,{
                 onUploadProgress: function (progressEvent) {
                     console.log(progressEvent);
-                    var progressClassList = document.getElementsByClassName("progressComment progress-bar progress-bar-success");
-                     _.forEach(progressClassList, (obj) => {
-                        obj.style.width = (((progressEvent.loaded/progressEvent.total)*100) - 2)+"%";
+                    _.forEach(progressClassList, (obj) => {
+                        obj.style.width = (((progressEvent.loaded/progressEvent.total)*100) - 8)+"%";
                     });
                     
                 }

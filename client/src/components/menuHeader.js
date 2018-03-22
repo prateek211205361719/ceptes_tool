@@ -11,6 +11,7 @@ class MenuHeader extends Component{
 
     }
     redirectURL(url){
+        //to handle mobile menubar to hide
         this.props.history.push(url);
         var menuSidebar = document.getElementById("menuSidebar");
         menuSidebar.classList.toggle("show-on-mobile");

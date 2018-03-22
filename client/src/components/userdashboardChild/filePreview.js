@@ -30,7 +30,7 @@ class FilePreview extends Component{
                 this.props.showModal ? userContext.style.zIndex = "auto" : userContext.style.zIndex = "9";
      
         return(
-            <div id="filePreviewModal" className="modal" style={style} >
+            <div id="filePreviewModal" styl={{"paddingTop":"70px"}} className="modal" style={style} >
                 <span onClick={this.closeModal.bind(this)} className="close1">&times;</span>
                 <div className="content">
                     <div className="embed-container">

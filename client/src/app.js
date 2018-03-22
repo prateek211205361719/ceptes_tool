@@ -18,10 +18,23 @@ import * as action from './actions';
 
 import Notify from './components/notify';
 import Modal from './components/modal';
+const socketIOClient = require('socket.io-client')  
+window.socket = socketIOClient.connect('http://localhost:5000');
 
 class App extends Component{
+    constructor(){
+        super();
+      
+        
+    }
     componentDidMount(){
         this.props.isLogin();
+        var obj = this;
+        window.socket.on('message', function(data) {
+            if(obj.props.currentTask && (obj.props.currentTask._id  === data._taskId))
+                 obj.props.createComment(data);
+        });
+        
     }
 
     render(){
@@ -53,7 +66,7 @@ class App extends Component{
 
 function mapStateToProps(state){
     console.log(state);
-    return {auth:state.auth};
+    return {auth:state.auth, currentTask: state.selectedtask};
 }
 export default connect(mapStateToProps, action)(App);
 

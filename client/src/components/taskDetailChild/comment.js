@@ -9,7 +9,10 @@ import { Link } from 'react-router-dom';
 class Comment extends Component{
    
     state = {showPreview: false,fileId:''};
-
+    
+    componentWillMount(){
+        
+    }
     showPreview(fileId){
        
         this.setState({showPreview: true, fileId:fileId});
@@ -18,6 +21,7 @@ class Comment extends Component{
         this.setState({showPreview: false, fileId:''});
     }
     componentDidMount(){
+       
         this.props.getComment(this.props.currentTask._id);
     }
     render(){

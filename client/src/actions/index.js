@@ -12,10 +12,10 @@ export const isLogin = (history) =>  async (dispatch) => {
             playload:response.data
         }); 
         if(!response.data){
-            window.location.href= '/login';
+            //window.location.href= '/login';
         }
     }catch(e){
-        window.location.href= '/login';
+        //window.location.href= '/login';
         
     }
     dispatch(hideLoading());

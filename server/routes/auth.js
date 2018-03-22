@@ -18,7 +18,8 @@ module.exports = (app) => {
         res.redirect('/');
     });
 
-    app.get('/api/login', (req, res) => {
+    app.get('/api/login',isUserLogin, (req, res) => {
+       
         res.send(req.user);
     });
 
