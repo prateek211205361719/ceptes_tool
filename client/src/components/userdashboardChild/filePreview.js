@@ -13,7 +13,7 @@ class FilePreview extends Component{
         var navbar = document.getElementsByClassName("navbar")[0];
         if(this.props.showModal){
             menuContainer.style.zIndex = "auto";
-            navbar.style.zIndex = "auto"
+            navbar.style.zIndex = "auto";
             
         }else{
             menuContainer.style.zIndex = "10";
@@ -27,11 +27,13 @@ class FilePreview extends Component{
         return(
             <div id="filePreviewModal" className="modal" style={style} >
                 <span onClick={this.closeModal.bind(this)} className="close1">&times;</span>
-                <div className="previewIframe">
-                    {
-                        this.props.showModal ?  
-                        <iframe class="previewIframe" style={{"width":"100%","minHeight":"1000px","border":"0"}} src={`/api/comment/readfile/${this.props.fileId}`}></iframe> : null 
-                    }
+                <div className="content">
+                    <div className="embed-container">
+                        {
+                            this.props.showModal ?  
+                            <iframe frameborder="0"  src={`/api/comment/readfile/${this.props.fileId}`}></iframe> : null 
+                        }
+                    </div>
                   </div>
         
             </div>

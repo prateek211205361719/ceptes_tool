@@ -5,6 +5,7 @@ import Moment from 'react-moment';
 import { connect } from 'react-redux';
 import * as action from '../../actions';
 import FilePreview from '../userdashboardChild/filePreview';
+import { Link } from 'react-router-dom';
 class Comment extends Component{
    
     state = {showPreview: false,fileId:''};
@@ -37,15 +38,15 @@ class Comment extends Component{
                                                     <li key={`commentItem${index}`}>
                                                         <time className="cbp_tmtime">
                                                             <span className="hidden">
-                                                                <Moment format="YYYY/MM/DD">
+                                                                <Moment format="YYYY-MM-DD HH:mm:ss">
                                                                     {item.created_at}
                                                                 </Moment>
                                                            
                                                              </span> 
-                                                            <span className="large">Now</span>
+                                                           
                                                         </time>
                                                         <div className="cbp_tmicon" style={{"background":"none","fontSize":0}}>
-                                                             <a href="javascript:void(0)"><img  width="50" src={item._owner[0].photo} style={{"borderRadius": "50%"}} /></a>
+                                                             <Link to={`/user/${item._owner[0]._userId}`}><img  width="50" src={item._owner[0].photo} style={{"borderRadius": "50%"}} /></Link>
                                                         </div>
                                                         <div className="cbp_tmlabel"> 
                                                             <p>{item.description}</p>
@@ -56,7 +57,9 @@ class Comment extends Component{
                                                                     })
                                                                 }
                                                             </div>
+                                                            <span style={{"fontWeight":"normal","fontSize":"10px","textAlign":"center"}} className="large"><Moment fromNow>{item.created_at}</Moment></span>
                                                         </div>
+                                                       
                                                     </li>
                                             );
                                         })  

@@ -34,26 +34,32 @@ class TaskRecord extends Component{
            return(
                 <tr key={`taskBody${index}`}>
                     <td style={{"display": "table-cell"}} className="footable-first-visible">
+                       <strong className="mobile_label">Name:&nbsp;</strong>
                        <a href="#" onClick={this.taskRedirect.bind(this, item._id)} >{item.name}</a>
                      
                     </td>
                     <td style={{"display": "table-cell"}} className="footable-first-visible">
+                        <strong className="mobile_label">Priority:&nbsp;</strong>
                         {item.priority}
                     </td>
                     <td style={{"display": "table-cell"}} className="footable-first-visible">
+                       <strong className="mobile_label">Start date:&nbsp;</strong>
                         <Moment format="YYYY/MM/DD">
                              {item.startDate}
                         </Moment>
                     </td>
                     <td style={{"display": "table-cell"}} className="footable-first-visible">
+                        <strong className="mobile_label">End date:&nbsp;</strong>
                         <Moment format="YYYY/MM/DD">
                              {item.dueDate}
                         </Moment>
                     </td>
                     <td style={{"display": "table-cell"}} className="footable-first-visible">
+                         <strong className="mobile_label">Status:&nbsp;</strong>
                           {item.status}
                     </td>
                     <td style={{"display": "table-cell"}} className="footable-first-visible">
+                        <strong className="mobile_label">Project:&nbsp;</strong>
                          <a href="#" onClick={this.changeToProjectPath.bind(this, item.project[0]._projectId)}> {item.project[0].name} </a>
                     </td>
                     

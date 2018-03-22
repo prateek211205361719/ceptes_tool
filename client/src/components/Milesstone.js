@@ -58,26 +58,32 @@ class Milesstone extends Component {
        return this.props.milesstoneList.map((item, index) => {
             return(
                 <tr key={`milesstone${index}`}>
-                    <td style={{"display": "table-cell"}} className="footable-first-visible"> {item.name}</td>
+                    <td style={{"display": "table-cell"}} className="footable-first-visible">
+                       <strong className="mobile_label">Name:&nbsp;</strong> {item.name}
+                     </td>
                     <td style={{"display": "table-cell"}}> 
-                        <Link to={`/user/${item._responsible[0]._userId}`} >{item._responsible[0].name}</Link>
+                         <strong className="mobile_label">Responsible:&nbsp;</strong><Link to={`/user/${item._responsible[0]._userId}`} >{item._responsible[0].name}</Link>
                     </td>
                     <td style={{"display": "table-cell"}}> 
+                        <strong className="mobile_label">Start date:&nbsp;</strong>
                         <Moment format="YYYY/MM/DD">
                              {item.startDate}
                         </Moment>
                     </td>
                     <td style={{"display": "table-cell"}}> 
+                       <strong className="mobile_label">End date:&nbsp;</strong>
                        <Moment format="YYYY/MM/DD">
                              {item.endDate}
                         </Moment>
                     </td>
                     <td style={{"display": "table-cell"}}> 
+                        <strong className="mobile_label">Project:&nbsp;</strong>
                         <a href="#" onClick={this.changeToProjectPath.bind(this, item.project[0]._projectId)}> 
                             {item.project[0].name}
                         </a>
                     </td>
                     <td style={{"display": "table-cell"}}> 
+                        <strong className="mobile_label">Action:&nbsp;</strong>
                         <a href="#" onClick={this.openMilesStone.bind(this, index)}> 
                             Edit
                         </a>

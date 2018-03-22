@@ -10,6 +10,7 @@ import { withRouter } from  'react-router-dom';
 class Header extends Component{
 
     componentDidMount(){
+        //this.props.getUserDashBoard(this.props.history);
         document.body.addEventListener( "click", function(e){
                 //if(!e.target.classList.contains('dropdown-toggle') && !e.target.classList.contains('heartbit') && !e.target.classList.contains('zmdi zmdi-flag') && !e.target.classList.contains('imagePopover')){
                 var showList = document.getElementsByClassName("show");
