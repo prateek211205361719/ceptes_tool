@@ -32,17 +32,18 @@ module.exports = (app, connection) => {
          comment._files = fileList;
          var newComment  = await comment.save();
          var userList =  app.get("users");
-         console.log(req.user);
-         var finalUserList = _.filter(userList, (eachUser) => {
+         
+         /*var finalUserList = _.filter(userList, (eachUser) => {
                 return (eachUser.userId != req.user.id);
          })
          console.log(finalUserList);
-         _.forEach(finalUserList , function(sId){
+         */
+         _.forEach(userList , function(sId){
               res.io.to(sId.socketId).emit("message", newComment);
          })
        
        
-         res.send(newComment);
+         res.send("done");
     });
 
     app.get('/api/comment/:taskId', async (req, res) => {

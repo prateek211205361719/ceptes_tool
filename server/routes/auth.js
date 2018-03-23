@@ -5,6 +5,7 @@ const { Users }  = require('../models/users');
 const { userTaskList, pastDueTaskList, milestoneList } =   require('../helper/userinfo');
 const _ =  require("lodash");
 var users = [];
+//var users = {};
 module.exports = (app) => {
    
     app.get('/auth/google',
@@ -21,7 +22,8 @@ module.exports = (app) => {
 
     app.get('/api/login', isUserLogin, (req, res) => {
         var socketId = app.get("socketId");
-        if(req.user){
+        users.push({userId:req.user._id , socketId: socketId});
+       /* if(req.user){
            var index =  _.findIndex(users ,{userId:req.user._id});
            if(index > -1){
                users[index].socketId = socketId;
@@ -29,11 +31,16 @@ module.exports = (app) => {
               users.push({userId:req.user._id , socketId: socketId});
            }
            app.set('users', users);
-        }
+        }*/
+        app.set('users', users);
         res.send(req.user);
     });
 
     app.get('/api/logout', (req, res) => {
+        var finalUserList = _.filter(app.get("users"), (eachUser) => {
+              return (eachUser.userId != req.user.id);
+        })
+        app.set("users", finalUserList);
         req.logout();
         res.redirect('/login');
     }); 

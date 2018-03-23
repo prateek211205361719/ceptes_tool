@@ -42,7 +42,7 @@ class CommentBox extends Component{
             });
             if(result){
                
-                this.props.createComment(result.data);
+                //this.props.createComment(result.data);
                 this.setState({fileList:[],comment:''});
                 this.props.hideLodingProgress();
                 document.getElementById("commentInput").value = '';

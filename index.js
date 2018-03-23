@@ -48,7 +48,7 @@ require('./server/routes/project')(app);
 require('./server/routes/milesstone')(app);
 require('./server/routes/tasklist')(app);
 require('./server/routes/task')(app);
-require('./server/routes/comment')(app, connection);
+require('./server/routes/comment')(app, users);
 
 
 // code to push production
