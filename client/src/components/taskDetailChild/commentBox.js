@@ -73,9 +73,9 @@ class CommentBox extends Component{
                         <i className="zmdi zmdi-file-text"></i>
                         <input  type="file" multiple="true" onChange={this.handleFile.bind(this)} />
                     </a>
-                    <a href="javascript:void(0);" onClick={this.uploadFile.bind(this)} className="btn btn-raised btn-info btn-round"> 
+                    <button disabled={this.props.loadingBar.default}  href="javascript:void(0);" onClick={this.uploadFile.bind(this)} className="btn btn-raised btn-info btn-round"> 
                          <i className="zmdi zmdi-mail-send"></i
-                    ></a>                            
+                    ></button>                            
                 </div>
             </div>
         );
@@ -85,7 +85,8 @@ class CommentBox extends Component{
 
 function mapStateToProps(state){
     return{
-        currentTask : state.selectedtask
+        currentTask : state.selectedtask,
+        loadingBar: state.loadingBar
     }
 }
 export default connect(mapStateToProps, action)(CommentBox);
