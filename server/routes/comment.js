@@ -31,11 +31,16 @@ module.exports = (app, connection) => {
          comment._owner = {name, photo,email, _userId: _id};
          comment._files = fileList;
          var newComment  = await comment.save();
-         /*res.io.on('connection', function(socket){
-            socket.emit("message", newComment);
-           
-         });*/
-         res.io.emit("message", newComment);
+         var userList =  app.get("users");
+         console.log(req.user);
+         var finalUserList = _.filter(userList, (eachUser) => {
+                return (eachUser.userId != req.user.id);
+         })
+         console.log(finalUserList);
+         _.forEach(finalUserList , function(sId){
+              res.io.to(sId.socketId).emit("message", newComment);
+         })
+       
        
          res.send(newComment);
     });

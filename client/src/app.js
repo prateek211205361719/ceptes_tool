@@ -30,11 +30,15 @@ class App extends Component{
     componentDidMount(){
         this.props.isLogin();
         var obj = this;
+        
         window.socket.on('message', function(data) {
             if(obj.props.currentTask && (obj.props.currentTask._id  === data._taskId))
                  obj.props.createComment(data);
         });
-        
+       
+
+       
+       
     }
 
     render(){

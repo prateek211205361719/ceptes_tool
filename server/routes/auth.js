@@ -1,11 +1,12 @@
 
-
 const passport = require('passport');
 const { Projects }  = require('../models/projects');
 const { Users }  = require('../models/users');
 const { userTaskList, pastDueTaskList, milestoneList } =   require('../helper/userinfo');
-
+const _ =  require("lodash");
+var users = [];
 module.exports = (app) => {
+   
     app.get('/auth/google',
     passport.authenticate('google', { 
         scope: ['profile','https://www.googleapis.com/auth/userinfo.email'],
@@ -18,8 +19,17 @@ module.exports = (app) => {
         res.redirect('/');
     });
 
-    app.get('/api/login',isUserLogin, (req, res) => {
-       
+    app.get('/api/login', isUserLogin, (req, res) => {
+        var socketId = app.get("socketId");
+        if(req.user){
+           var index =  _.findIndex(users ,{userId:req.user._id});
+           if(index > -1){
+               users[index].socketId = socketId;
+           }else{
+              users.push({userId:req.user._id , socketId: socketId});
+           }
+           app.set('users', users);
+        }
         res.send(req.user);
     });
 
@@ -53,4 +63,5 @@ function  isUserLogin(req, res, next){
        return res.status(400).send();
     }
     next();
+   
 }
