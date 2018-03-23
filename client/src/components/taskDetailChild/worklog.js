@@ -1,14 +1,17 @@
-
-import React, { Component } from 'react';
-
-class WorlLog extends Component{
+import React,{Component} from'react';
+class Basic6 extends Component{
+    constructor(){
+        super();
+        this.state={
+            name:["AbD", " ", "Dravid", " " ,"Gayle"]
+        }
+    }
     render(){
         return(
             <div>
-                Work log
+               {this.state.name}
             </div>
         );
     }
 }
-
-export default WorlLog;
+export default Basic6; 
