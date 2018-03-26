@@ -9,10 +9,19 @@ import SubTask from './taskDetailChild/subTask';
 import Comment from './taskDetailChild/comment';
 import Activity from './taskDetailChild/activity';
 import Moment from 'react-moment';
-
+import { withRouter }  from 'react-router-dom';
 
 class TaskDetail extends Component{
     state ={ currentTab:'Work Log', tabs:[{label:'Work Log',class:'active'},{label:'Sub Task',class:''},{label:'Comment',class:''},{label:'Activity',class:''}]};
+    
+    componentDidMount(){
+        var { currentTask, history }  = this.props;
+        if(_.isEmpty(currentTask)){
+            history.push('/task');
+        }
+        
+    }
+
     changeToProjectPath(projectId){
         var path = `/project/${projectId}`;
         var index = _.findIndex(this.props.project, {_id: projectId});
@@ -22,6 +31,7 @@ class TaskDetail extends Component{
             this.props.history.push(path);
         }else{
             alert("dont belong to this project");
+            //this.props.history.push('/path');
         }
     }
 
@@ -58,10 +68,15 @@ class TaskDetail extends Component{
                                         <div className="tab-pane body active">
                                             <small className="text-muted">Project: </small>
                                             <p>
-                                                <a href="#" onClick={this.changeToProjectPath.bind(this, currentTask.project[0]._projectId)}> 
-                                                    {currentTask.project[0].name}
-                                                </a>  
-                                            </p>  
+                                                {
+                                                    _.isEmpty(currentTask) ? null : (
+                                                        <a href="#" onClick={this.changeToProjectPath.bind(this, currentTask.project[0]._projectId)}> 
+                                                            {currentTask.project[0].name}
+                                                        </a>  
+                                                    )
+                                                }
+                                               
+                                            </p> 
                                              <hr/>
                                              <small className="text-muted">Description: </small>
                                              <p>{currentTask.description}</p>

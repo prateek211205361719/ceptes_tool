@@ -45,7 +45,7 @@ module.exports = (app) => {
         res.redirect('/login');
     }); 
 
-    app.get('/api/userInfo',isUserLogin, async (req, res) => {
+    app.get('/api/userInfo', async (req, res) => {
        
         try{
             var result = await Projects.find({$or:[ {'Users._userId': req.user._id}, {'_owner':req.user._id}]}).sort([['created_at', 'descending']]);

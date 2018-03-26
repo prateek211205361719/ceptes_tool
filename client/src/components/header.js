@@ -53,7 +53,7 @@ class Header extends Component{
     render(){
         return(
             <div>
-                
+            
                 <nav className="navbar p-l-5 p-r-5">
                      <ul className="nav navbar-nav navbar-left">
                         <li>
@@ -106,6 +106,8 @@ class Header extends Component{
                         </li>
                     </ul>
                 </nav>
+               
+               
             </div>
         );
     }

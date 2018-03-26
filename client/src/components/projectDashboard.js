@@ -7,14 +7,18 @@ import {connect} from 'react-redux';
 import * as action from '../actions';
 import CircularProgressbar from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
-
+import { withRouter } from 'react-router-dom';
+import _ from 'lodash';
 
 class ProjectDashboard extends Component{
-   
     componentDidMount(){
-       
-       
+        var { currentProject, history }  = this.props;
+        if(_.isEmpty(currentProject)){
+            history.push('/');
+        }
+        
     }
+    
     editProject(){
         var sidebar = document.getElementById("sidebar");
         sidebar.classList.add('open');
@@ -57,7 +61,12 @@ class ProjectDashboard extends Component{
                             <div className="col-lg-4 col-md-12 col-sm-12">
                                 <div className="card">
                                     <div className="header">
-                                        <h2><strong>Team</strong>({selectedProject.Users.length})</h2>
+                                        <h2><strong>Team</strong>(
+                                            {
+                                              _.isEmpty(selectedProject) ? null : selectedProject.Users.length
+                                               
+                                            }
+                                        )</h2>
                                         <ul className="header-dropdown">
                                             <li className="dropdown" id="projectMenu">
                                             <a href="#" onClick={() => document.getElementById("projectMenu").classList.toggle('show')}> <i className="zmdi zmdi-more"></i> </a>
@@ -71,7 +80,11 @@ class ProjectDashboard extends Component{
                                         </ul>
                                     </div>
                                     <div className="body">
-                                        <UserCard users={selectedProject.Users} />
+                                           {
+                                              _.isEmpty(selectedProject) ? null :  <UserCard users={selectedProject.Users} />
+                                               
+                                            }
+                                       
                                     </div>
                                 </div>
                             </div>
@@ -89,4 +102,4 @@ function mapStateToProps(state){
         currentProject: state.selectedProject,
     };
 }
-export default connect(mapStateToProps, action)(ProjectDashboard);
+export default connect(mapStateToProps, action)(withRouter(ProjectDashboard));

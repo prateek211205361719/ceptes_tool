@@ -14,6 +14,7 @@ class Home extends Component{
         
         return(
             <section className="content">
+            
                 <BlockHeader header={this.props.auth ? `Welcome ${this.props.auth.name}` : ''} />
                     <div className="container-fluid">
 

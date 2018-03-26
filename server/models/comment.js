@@ -42,7 +42,8 @@ const commentSchema = Schema({
             type:Schema.Types.ObjectId,
             required:true
         }
-     }]
+     }],
+    
 });
 const Comment = mongoose.model('comment', commentSchema);
 

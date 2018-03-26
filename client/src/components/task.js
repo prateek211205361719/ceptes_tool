@@ -4,12 +4,16 @@ import BlockHeader from './blockHeader';
 import  {connect} from 'react-redux';
 import TaskRecord from './task-child/taskRecord';
 import * as action from '../actions';
+import { withRouter } from 'react-router-dom';
 
 import _ from 'lodash';
 class Task extends Component{
     state = {tabs:[{label:'Past Due',class:'active'},{label:'Pending',class:''},{label:'Completed', class:''},{label:'All', class:''}]};
     
     componentDidMount(){
+        var { history, auth } = this.props;
+        if(_.isEmpty(auth))
+             this.props.getUserDashBoard(history);
           this.props.getTask(_.find(this.state.tabs, { 'class': 'active'}).label, this.props.currentProject._id);
     }
 
@@ -83,4 +87,4 @@ function mapStateToProps(state){
     return {auth:state.auth, currentProject: state.selectedProject};
 }  
 
-export default connect(mapStateToProps, action)(Task);
+export default connect(mapStateToProps, action)(withRouter(Task));

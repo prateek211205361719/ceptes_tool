@@ -30,8 +30,11 @@ class App extends Component{
     componentDidMount(){
         this.props.isLogin();
         var obj = this;
-        
+        //var snd = new Audio("media/file-sounds-1101-plucky.mp3");
         window.socket.on('message', function(data) {
+           
+            //if(data._owner[0]._userId !== obj.props.auth._id)
+                //snd.play();
             if(obj.props.currentTask && (obj.props.currentTask._id  === data._taskId))
                  obj.props.createComment(data);
         });
@@ -46,6 +49,7 @@ class App extends Component{
         return(
             <BrowserRouter>
                 <div>
+                  
                     <Route path="/login"  component={Login} />
                    
                     <Header />

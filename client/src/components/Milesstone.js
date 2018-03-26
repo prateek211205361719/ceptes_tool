@@ -10,6 +10,17 @@ import {Link, withRouter} from 'react-router-dom';
 import _ from 'lodash';
 class Milesstone extends Component {
     state = {thead: [{label:'Name'},{label:'Responsible'},{label:'Start Date'},{label:'End Date'},{label:'Project'},{label:'Actions'}]};
+    
+    componentDidMount(){
+        var { history, auth } = this.props;
+        if(_.isEmpty(auth))
+             this.props.getUserDashBoard(history);
+        var selectedProject = this.props.currentProject;
+        this.props.getMilesStone(selectedProject._id);
+      
+       
+    }   
+
     openSidebar(){
         var sidebar = document.getElementById("sidebar");
         sidebar.classList.add('open');
@@ -39,10 +50,6 @@ class Milesstone extends Component {
         this.props.refreshForm(false, 'Milestone', 'Edit');
     }
 
-    componentDidMount(){
-        var selectedProject = this.props.currentProject;
-        this.props.getMilesStone(selectedProject._id);
-    }
     changeToProjectPath(projectId){
         var path = `/project/${projectId}`;
         var index = _.findIndex(this.props.project, {_id: projectId});

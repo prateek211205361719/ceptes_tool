@@ -26,18 +26,14 @@ module.exports = (app, connection) => {
         var comment = new Comment({
             description: req.body.description,
             _taskId: req.body.taskId,
+         
            
          });
          comment._owner = {name, photo,email, _userId: _id};
          comment._files = fileList;
          var newComment  = await comment.save();
+         console.log(newComment);
          var userList =  app.get("users");
-         
-         /*var finalUserList = _.filter(userList, (eachUser) => {
-                return (eachUser.userId != req.user.id);
-         })
-         console.log(finalUserList);
-         */
          _.forEach(userList , function(sId){
               res.io.to(sId.socketId).emit("message", newComment);
          })
