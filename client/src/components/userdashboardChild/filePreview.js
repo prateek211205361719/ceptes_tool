@@ -25,18 +25,18 @@ class FilePreview extends Component{
             navbar.style.zIndex = "11";
             
         }
-        var style = this.props.showModal ? {"zIndex":"14","display":"block"} : {"zIndex":"0","display":"none"};
+        var style = this.props.showModal ? {"zIndex":"14","display":"block","paddingTop":"0"} : {"zIndex":"0","display":"none"};
         if(userContext)
                 this.props.showModal ? userContext.style.zIndex = "auto" : userContext.style.zIndex = "9";
      
         return(
-            <div id="filePreviewModal" styl={{"paddingTop":"70px"}} className="modal" style={style} >
-                <span onClick={this.closeModal.bind(this)} className="close1">&times;</span>
+            <div id="filePreviewModal" className="modal" style={style} >
+                <span style={{"color":"white","zIndex":"14"}} onClick={this.closeModal.bind(this)} className="close1">&times;</span>
                 <div className="content">
                     <div className="embed-container">
                         {
                             this.props.showModal ?  
-                            <iframe frameborder="0"  src={`/api/comment/readfile/${this.props.fileId}`}></iframe> : null 
+                            <iframe  style={{"background":"white"}} frameBorder="0"  src={`/api/comment/readfile/${this.props.fileId}`}></iframe> : null 
                         }
                     </div>
                   </div>
