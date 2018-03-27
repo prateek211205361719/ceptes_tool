@@ -44,7 +44,7 @@ class MileStoneDetail extends Component{
         switch(this.state.currentTab){
             case 'Task':
                return <TaskRecord  type="milestoneView"/>
-             case 'Manage Task':
+             case 'Assign Task':
                 return <ManageTask />
             default:
                 return null;
