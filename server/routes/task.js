@@ -1,7 +1,30 @@
 const moment = require('moment');
 const { Tasks } = require('../models/task');
 const { userPastDueTaskList } = require('../helper/taskHelper');
+const _ = require("lodash");
 module.exports =  (app) => {
+    
+    //get all task according to milestone and project
+    app.get('/api/tasks/milestone/:milestoneId', async (req, res) => {
+        var projectId = req.query.projectId;
+        var milestoneId =req.params.milestoneId;
+        let assignTaskList = await Tasks.find({_mileStoneId: milestoneId});
+        let unAssignTaskList = await Tasks.find({
+            $and:[
+                  {_mileStoneId: null},
+                  {'project._projectId': projectId}
+            ]
+        });
+        res.send({assignTaskList, unAssignTaskList});
+    });
+
+    //get all task related to project which dont belogs to milesstone
+    app.get('/api/tasks/milestone/:milestoneId', async (req, res) => {
+        var milestoneId =req.params.milestoneId;
+        let taskList = await Tasks.find({_mileStioneId: null});
+        res.send(taskList);
+    });
+
 
     app.get('/api/tasks/:projectId', async (req, res) => {
         //const todayDatetime = moment(Date.now()).format('YYYY-MM-DDTHH:MM:SS.sss');
@@ -83,6 +106,32 @@ module.exports =  (app) => {
             res.status(400).send(err);
         }
     });
+    
+    // updating task with milestoneid
+     app.post('/api/updateTaskByMilesStone/:id', async  (req, res) => {
+            var mileStoneId = req.params.id;
+            var {assignedTask, unAssigned} = req.body;
+            
+           
+            _.forEach(assignedTask , async (item) => {
+                 item._mileStoneId = mileStoneId;
+                 let updatedTask =  await Tasks.findByIdAndUpdate(item._id, {$set:item},{new: true});
+             
+            })
+            _.forEach(unAssigned , async (item) => {
+                item._mileStoneId = null;
+                let updatedTask =  await Tasks.findByIdAndUpdate(item._id, {$set:item},{new: true});
+            
+           })
+
+            res.redirect(`/api/tasks/milestone/${mileStoneId}?projectId=5ab64288d30def00143228f9`);
+            //var assignedTaskList = await Tasks.find({_mileStoneId : mileStoneId});
+           // console.log(assignedTaskList);
+            //res.send(assignedTaskList);
+
+            
+     });
+
 
     //Delete the task
     app.delete('/api/deleteTask/:task_id', async (req, res) => {

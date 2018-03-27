@@ -99,7 +99,6 @@ class Header extends Component{
                             <ImageModal userID={this.props.auth != null ? this.props.auth._id : ''} name={this.props.auth != null ? this.props.auth.name : ''} email={this.props.auth != null ? this.props.auth.email : ''} image={this.props.auth != null ? this.props.auth.photo : ''} />
                         </li>
                         <li className="float-right">
-                            <a href="sign-in.html" className="mega-menu" data-close="true"><i className="zmdi zmdi-power" /></a>
                             <a href="javascript:void(0);" onClick={this.openSidebar.bind(this)} className="js-right-sidebar" data-close="true">
                                 <i className="zmdi zmdi-settings zmdi-hc-spin" />
                             </a>

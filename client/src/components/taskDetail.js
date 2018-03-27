@@ -9,7 +9,7 @@ import SubTask from './taskDetailChild/subTask';
 import Comment from './taskDetailChild/comment';
 import Activity from './taskDetailChild/activity';
 import Moment from 'react-moment';
-import { withRouter }  from 'react-router-dom';
+import { withRouter,Link }  from 'react-router-dom';
 
 class TaskDetail extends Component{
     state ={ currentTab:'Work Log', tabs:[{label:'Work Log',class:'active'},{label:'Sub Task',class:''},{label:'Comment',class:''},{label:'Activity',class:''}]};
@@ -97,9 +97,19 @@ class TaskDetail extends Component{
                                             <small className="text-muted">Due Date: </small>
                                             <p>
                                                 <Moment format="YYYY/MM/DD">
-                                                {currentTask.dueDate} 
+                                                     {currentTask.dueDate} 
                                                 </Moment>
                                             </p>
+                                            <hr/>
+                                            <small className="text-muted">Assigned Users:</small>
+                                                {
+                                                    _.isEmpty(currentTask) ? null : (
+                                                                currentTask.assignedUsers.map((user) => {
+                                                                         return (<p style={{"margin":"0"}}><Link to={`/user/${user._userId}`}> { user.name }</Link></p>);
+                                                                    })
+                                                                )
+                                                }
+                                              
                                              <hr/>
                                         </div>
                                     </div>

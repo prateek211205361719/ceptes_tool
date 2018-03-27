@@ -19,7 +19,13 @@ class Milesstone extends Component {
         this.props.getMilesStone(selectedProject._id);
       
        
-    }   
+    } 
+    redirect(mileStoneObj){
+        this.props.currentMilesStone(mileStoneObj,null);
+        this.props.history.push(`/milestone/${mileStoneObj._id}`);
+       
+    }
+
 
     openSidebar(){
         var sidebar = document.getElementById("sidebar");
@@ -66,7 +72,8 @@ class Milesstone extends Component {
             return(
                 <tr key={`milesstone${index}`}>
                     <td style={{"display": "table-cell"}} className="footable-first-visible">
-                       <strong className="mobile_label">Name:&nbsp;</strong> {item.name}
+                       <strong className="mobile_label">Name:&nbsp;</strong> 
+                       <a href="javascript:void(0);" onClick={this.redirect.bind(this,item)}> {item.name} </a>
                      </td>
                     <td style={{"display": "table-cell"}}> 
                          <strong className="mobile_label">Responsible:&nbsp;</strong><Link to={`/user/${item._responsible[0]._userId}`} >{item._responsible[0].name}</Link>

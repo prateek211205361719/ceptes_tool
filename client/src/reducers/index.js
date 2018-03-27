@@ -11,6 +11,7 @@ import selectedMileStone from  './selectedMilestone.js';
 import tasks from './task';
 import selectedtask from './selectedTask';
 import comment from './comment';
+import unAssignTask from './unassignTask';
 import { loadingBarReducer } from 'react-redux-loading-bar'
 console.log(loadingBarReducer);
 export default combineReducers({
@@ -23,6 +24,7 @@ export default combineReducers({
     milesstoneList: milesstone,
     selectedMileStone,
     tasks,
+    unAssignTask,
     selectedtask,
     comment,
     loadingBar: loadingBarReducer

@@ -26,7 +26,7 @@ class MenuHeader extends Component{
                             <a href="javascript:void(0);"  onClick={this.redirectURL.bind(this, _.isEmpty(selectedProject) ? '/' : `/project/${this.props.selectedProject._id}`)}>Dashboard</a>
                         </li>
                         <li className="menu-dropdown-icon">
-                            <a href="javascript:void(0);" onClick={this.redirectURL.bind(this,'/milesstone')}>Milestone</a>
+                            <a href="javascript:void(0);" onClick={this.redirectURL.bind(this,'/milestone')}>Milestone</a>
                         </li>
                         <li className="menu-dropdown-icon">
                              <a  href="javascript:void(0);" onClick={this.redirectURL.bind(this,'/task')}>Task</a>

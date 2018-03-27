@@ -160,6 +160,7 @@ export const updateMileStone = (mileStoneObj, index) => async function(dispatch)
 }
 
 
+
 export const getTask = (type, projectId) => async function(dispatch){
     dispatch(showLoading());
     try{
@@ -171,10 +172,30 @@ export const getTask = (type, projectId) => async function(dispatch){
     }
     catch(e){
         console.log(e);
+        dispatch(hideLoading());
        
     }
     dispatch(hideLoading());
  
+}
+
+export const getTaskByMilestone = (mileStoneId, projectId) => async function(dispatch){
+    dispatch(showLoading());
+    try{
+        var result = await axios.get(`/api/tasks/milestone/${mileStoneId}?projectId=${projectId}`);
+        dispatch({
+            type:"GET_TASK",
+            playload:result.data.assignTaskList
+        }); 
+        dispatch({
+            type:"UNASSIGN_TASK",
+            playload:result.data.unAssignTaskList
+        }); 
+    }catch(e){
+        dispatch(hideLoading());
+    }
+    dispatch(hideLoading());
+    
 }
 
 
@@ -205,6 +226,21 @@ export const getComment = (taskId) => async function(dispatch){
     dispatch(hideLoading());
 }
 
+export const updateAssignOrUnAssignTask= (assign_unassignTask, mileStoneId) => async function(dispatch){
+    dispatch(showLoading());
+    var result = await axios.post(`/api/updateTaskByMilesStone/${mileStoneId}`, assign_unassignTask);
+    console.log(result.data);
+    dispatch({
+        type:"GET_TASK",
+        playload:result.data.assignTaskList
+    }); 
+    dispatch({
+        type:"UNASSIGN_TASK",
+        playload:result.data.unAssignTaskList
+    }); 
+    dispatch(hideLoading());
+}
+
 
 export const createComment = (commentObject) => {
     return{
@@ -213,6 +249,9 @@ export const createComment = (commentObject) => {
 
     }
 }
+
+
+
 
 export const showLodingProgress = (commentObject) => function(dispatch){
     dispatch(showLoading());

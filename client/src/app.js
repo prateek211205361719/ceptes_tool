@@ -10,7 +10,7 @@ import UserDashboard from './components/userdashboard';
 import ProjectDashboard from  './components/projectDashboard';
 import Task from  './components/task';
 import TaskDetail from './components/taskDetail';
-
+import MileStoneDetail from './components/MileStoneDetail';
 import { compose} from 'redux';
 import { connect } from 'react-redux';
 import { BrowserRouter, Route, withRouter } from 'react-router-dom';
@@ -33,10 +33,16 @@ class App extends Component{
         //var snd = new Audio("media/file-sounds-1101-plucky.mp3");
         window.socket.on('message', function(data) {
            
-            //if(data._owner[0]._userId !== obj.props.auth._id)
+            if(data._owner[0]._userId !== obj.props.auth._id){
+                alert("hello");
+                document.getElementById('favicon').href = './favicon-dot.ico';
+            }
                 //snd.play();
-            if(obj.props.currentTask && (obj.props.currentTask._id  === data._taskId))
+            if(obj.props.currentTask && (obj.props.currentTask._id  === data._taskId)){
                  obj.props.createComment(data);
+                
+                  
+            }
         });
        
 
@@ -60,7 +66,8 @@ class App extends Component{
                     <Route path="/project/:id"  component={ProjectDashboard} exact={true} />
                      <Route path="/task"  component={Task} exact={true} />
                     <Route path="/task/:id"  component={TaskDetail} exact={true} />
-                    <Route path="/milesstone"  component={Milesstone} exact={true} /> /
+                    <Route path="/milestone"  component={Milesstone} exact={true} /> 
+                    <Route path="/milestone/:id"  component={MileStoneDetail} exact={true} /> /
                     
                </div>
             </BrowserRouter>
