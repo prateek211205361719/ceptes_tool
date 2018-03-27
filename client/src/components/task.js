@@ -69,7 +69,7 @@ class Task extends Component{
                                        
                                         <div className="tab-content">
                                             <div role="tabpanel" className="tab-pane in active" id="home" aria-expanded="true">
-                                                <TaskRecord />
+                                                <TaskRecord type="taskView" />
                                             </div>
                                         </div>
                                         

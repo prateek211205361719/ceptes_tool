@@ -8,10 +8,11 @@ module.exports =  (app) => {
     app.get('/api/tasks/milestone/:milestoneId', async (req, res) => {
         var projectId = req.query.projectId;
         var milestoneId =req.params.milestoneId;
-        let assignTaskList = await Tasks.find({_mileStoneId: milestoneId});
+       
+        let assignTaskList = await Tasks.find({'milestone._mileStoneId': milestoneId});
         let unAssignTaskList = await Tasks.find({
             $and:[
-                  {_mileStoneId: null},
+                  {milestone: []},
                   {'project._projectId': projectId}
             ]
         });
@@ -114,12 +115,15 @@ module.exports =  (app) => {
             
            
             _.forEach(assignedTask , async (item) => {
-                 item._mileStoneId = mileStoneId;
+                 item.milestone.push({
+                    _mileStoneId:mileStoneId,
+                    name:'new Mile'
+                 });
                  let updatedTask =  await Tasks.findByIdAndUpdate(item._id, {$set:item},{new: true});
              
             })
             _.forEach(unAssigned , async (item) => {
-                item._mileStoneId = null;
+                item.milestone = [];
                 let updatedTask =  await Tasks.findByIdAndUpdate(item._id, {$set:item},{new: true});
             
            })

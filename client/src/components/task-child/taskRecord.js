@@ -7,8 +7,27 @@ import _ from 'lodash';
 import * as action from '../../actions';
 import { withRouter } from 'react-router-dom';
 class TaskRecord extends Component{
+     
    
-    state= {thead:[{label:'Name'},{label:'Priority'},{label:'Start Date'},{label:'End Date'},{label:'status'},{label:'Project'}]};
+    constructor(props){
+        super(props);
+        this.state = {thead: []};
+       
+     }
+
+     componentDidMount(){
+        var label = [];
+        if(this.props.type == 'taskView')
+            label =  [{label:'Name'},{label:'Priority'},{label:'Start Date'},{label:'End Date'},{label:'status'},{label:'Milestone'},{label:'Project'}];
+        else
+                label =  [{label:'Name'},{label:'Priority'},{label:'Start Date'},{label:'End Date'},{label:'status'}];   
+        this.setState({
+                thead:  label
+        });
+     }
+   
+    
+    
     taskRedirect(taskId){
         var index = _.findIndex(this.props.tasks, {_id: taskId});
         if(index > -1){
@@ -21,14 +40,28 @@ class TaskRecord extends Component{
 
     }
     
+    
     changeToProjectPath(projectId){
        var index = _.findIndex(this.props.project, {_id: projectId});
-        if(index > -1){
-            var selectedProject  = [].concat(this.props.project);
-            this.props.selectedProject(selectedProject[index], index);
-            this.props.history.push(`/project/${projectId}`);
-        }
-    }
+         if(index > -1){
+             var selectedProject  = [].concat(this.props.project);
+             this.props.selectedProject(selectedProject[index], index);
+             this.props.history.push(`/project/${projectId}`);
+         }
+     }
+     changeToMileStonePath(mileStoneId){
+       
+        alert("mileStoneId");
+        var index = _.findIndex(this.props.milesstoneList, {_id: mileStoneId});
+          if(index > -1){
+              var milesstoneList  = [].concat(this.props.milesstoneList);
+              this.props.currentMilesStone(milesstoneList[index], null);
+              this.props.history.push(`/milestone/${mileStoneId}`);
+          }else{
+              alert("no milesyone found");
+          }
+      }
+
     renderContent(){
        return this.props.tasks.map((item, index) => {
            return(
@@ -58,10 +91,23 @@ class TaskRecord extends Component{
                          <strong className="mobile_label">Status:&nbsp;</strong>
                           {item.status}
                     </td>
-                    <td style={{"display": "table-cell"}} className="footable-first-visible">
-                        <strong className="mobile_label">Project:&nbsp;</strong>
-                         <a href="#" onClick={this.changeToProjectPath.bind(this, item.project[0]._projectId)}> {item.project[0].name} </a>
-                    </td>
+                    {
+                        this.props.type == 'taskView' ? 
+                        <td style={{"display": "table-cell"}} className="footable-first-visible">
+                            <strong className="mobile_label">Milestone:&nbsp;</strong>
+                            {
+                                _.isEmpty(item.milestone) ? '' : (<a href="#" onClick={this.changeToMileStonePath.bind(this, item.milestone[0]._mileStoneId)}> {item.milestone[0].name} </a>)
+                            }
+                            
+                        </td> : null
+                    }
+                    {
+                     this.props.type == 'taskView' ? 
+                        <td style={{"display": "table-cell"}} className="footable-first-visible">
+                            <strong className="mobile_label">Project:&nbsp;</strong>
+                            <a href="#" onClick={this.changeToProjectPath.bind(this, item.project[0]._projectId)}> {item.project[0].name} </a>
+                        </td> : null
+                    }
                     
                  </tr>
              );
@@ -97,7 +143,7 @@ class TaskRecord extends Component{
 }
 
 function mapStateToProps(state){
-    return {tasks : state.tasks, loadingBar:state.loadingBar,project: state.project }
+    return {milesstoneList: state.milesstoneList ,tasks : state.tasks, loadingBar:state.loadingBar,project: state.project }
 }
 
 export default connect(mapStateToProps, action)(withRouter(TaskRecord));

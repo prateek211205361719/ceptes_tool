@@ -52,13 +52,13 @@ class ManageTask extends Component{
 
      saveChange(){
         var assignedTask = _.filter(this.state.assignedTask, (item) => {
-            return _.isEmpty(item._mileStoneId);
+            return _.isEmpty(item.milestone);
         })
         var unAssigned = _.filter(this.state.unAssigned, (item) => {
-            return !_.isEmpty(item._mileStoneId);
+            return !_.isEmpty(item.milestone);
         })
         var obj = {assignedTask, unAssigned};
-        
+        console.log(obj);
         this.props.updateAssignOrUnAssignTask(obj, this.props.match.params.id);
      }
     

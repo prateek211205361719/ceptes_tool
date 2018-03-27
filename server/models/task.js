@@ -72,9 +72,14 @@ const taskSchema = Schema({
     _taskId:{
         type:Schema.Types.ObjectId
     },
-    _mileStoneId:{
-        type:Schema.Types.ObjectId
-    },
+    milestone:[{
+        _mileStoneId:{
+            type:Schema.Types.ObjectId
+        },
+        name:{
+            type:String
+        }
+    }],
     assignedUsers:[
         {
             name:{

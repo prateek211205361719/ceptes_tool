@@ -11,7 +11,7 @@ import ManageTask from './task-child/manageTask';
 import { withRouter } from 'react-router-dom';
 
 class MileStoneDetail extends Component{
-    state ={ currentTab:'Task', tabs:[{label:'Task',class:'active'},{label:'Manage Task',class:''},{label:'Activity',class:''}]};
+    state ={ currentTab:'Task', tabs:[{label:'Task',class:'active'},{label:'Assign Task',class:''},{label:'Activity',class:''}]};
     changeToProjectPath(projectId){
         var path = `/project/${projectId}`;
         var index = _.findIndex(this.props.project, {_id: projectId});
@@ -43,7 +43,7 @@ class MileStoneDetail extends Component{
     renderContent(){
         switch(this.state.currentTab){
             case 'Task':
-               return <TaskRecord />
+               return <TaskRecord  type="milestoneView"/>
              case 'Manage Task':
                 return <ManageTask />
             default:
