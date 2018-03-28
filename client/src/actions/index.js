@@ -179,10 +179,16 @@ export const getTask = (type, projectId) => async function(dispatch){
  
 }
 
-export const getTaskByMilestone = (mileStoneId, projectId) => async function(dispatch){
+export const getTaskByMilestone = (mileStoneId , history) => async function(dispatch){
     dispatch(showLoading());
     try{
-        var result = await axios.get(`/api/tasks/milestone/${mileStoneId}?projectId=${projectId}`);
+        var result = await axios.get(`/api/tasks/milestone/${mileStoneId}`);
+        console.log(result);
+        dispatch({
+            type:"SELECTED_MILESTONE",
+            playload:result.data.mileStoneRecord
+        }); 
+        
         dispatch({
             type:"GET_TASK",
             playload:result.data.assignTaskList
@@ -191,6 +197,7 @@ export const getTaskByMilestone = (mileStoneId, projectId) => async function(dis
             type:"UNASSIGN_TASK",
             playload:result.data.unAssignTaskList
         }); 
+        history.push(`/milestone/${mileStoneId}`);
     }catch(e){
         dispatch(hideLoading());
     }

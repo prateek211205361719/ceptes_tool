@@ -49,17 +49,9 @@ class TaskRecord extends Component{
              this.props.history.push(`/project/${projectId}`);
          }
      }
-     changeToMileStonePath(mileStoneId){
-       
-        alert("mileStoneId");
-        var index = _.findIndex(this.props.milesstoneList, {_id: mileStoneId});
-          if(index > -1){
-              var milesstoneList  = [].concat(this.props.milesstoneList);
-              this.props.currentMilesStone(milesstoneList[index], null);
-              this.props.history.push(`/milestone/${mileStoneId}`);
-          }else{
-              alert("no milesyone found");
-          }
+     changeToMileStonePath(mileStoneId, history){
+        var { history } = this.props;
+        this.props.getTaskByMilestone(mileStoneId , history);
       }
 
     renderContent(){
@@ -96,7 +88,7 @@ class TaskRecord extends Component{
                         <td style={{"display": "table-cell"}} className="footable-first-visible">
                             <strong className="mobile_label">Milestone:&nbsp;</strong>
                             {
-                                _.isEmpty(item.milestone) ? '' : (<a href="#" onClick={this.changeToMileStonePath.bind(this, item.milestone[0]._mileStoneId)}> {item.milestone[0].name} </a>)
+                                _.isEmpty(item.milestone) ? '' : (<a href="javascript:void(0);" onClick={this.changeToMileStonePath.bind(this, item.milestone[0]._mileStoneId)}> {item.milestone[0].name} </a>)
                             }
                             
                         </td> : null

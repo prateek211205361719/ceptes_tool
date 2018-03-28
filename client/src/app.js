@@ -34,7 +34,12 @@ class App extends Component{
         window.socket.on('message', function(data) {
            
             if(data._owner[0]._userId !== obj.props.auth._id){
-                alert("hello");
+                var audioElement = document.createElement('audio'); 
+                audioElement.setAttribute('autoplay', false);
+                audioElement.setAttribute('src', 'media/file-sounds-1101-plucky.mp3'); 
+                audioElement.setAttribute('type', 'audio/mp3'); //or 'audio/ogg'
+                audioElement.setAttribute('autoplay', true);
+                
                 document.getElementById('favicon').href = './favicon-dot.ico';
             }
                 //snd.play();
@@ -55,6 +60,7 @@ class App extends Component{
         return(
             <BrowserRouter>
                 <div>
+                    
                   
                     <Route path="/login"  component={Login} />
                    

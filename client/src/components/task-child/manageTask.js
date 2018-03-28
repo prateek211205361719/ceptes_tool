@@ -96,18 +96,18 @@ class ManageTask extends Component{
                             </div>
                         </div>
                     </div>
-                    <div className="col-lg-2 col-md-12" style={{"textAlign":"center","marginTop":"10%"}}>
-                        
-                      <div>
+                    <div className="col-lg-2 col-md-12 asignMobileView">
+                         <div>
+                            <button onClick={this.assign.bind(this)} className="btn btn-primary btn-sm">
+                                <i className="zmdi zmdi-long-arrow-right"></i>
+                            </button>
+                       </div>  
+                       <div>
                             <button onClick={this.unAssigned.bind(this)} className="btn btn-primary btn-sm">
                                 <i className="zmdi zmdi-long-arrow-left"></i>
                             </button>
                         </div>
-                        <div>
-                            <button onClick={this.assign.bind(this)} className="btn btn-primary btn-sm">
-                                <i className="zmdi zmdi-long-arrow-right"></i>
-                            </button>
-                        </div>
+                       
                         
                     </div>
                     <div className="col-lg-5 col-md-12">
