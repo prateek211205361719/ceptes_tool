@@ -30,20 +30,19 @@ class App extends Component{
     componentDidMount(){
         this.props.isLogin();
         var obj = this;
-        //var snd = new Audio("media/file-sounds-1101-plucky.mp3");
+        var aud = new Audio('media/file-sounds-1101-plucky.mp3');
+        var favicon =  document.getElementById('favicon');
+      
         window.socket.on('message', function(data) {
            
             if(data._owner[0]._userId !== obj.props.auth._id){
-                var audioElement = document.createElement('audio'); 
-                audioElement.setAttribute('src', 'media/file-sounds-1101-plucky.mp3'); 
-                audioElement.setAttribute('type', 'audio/mp3'); //or 'audio/ogg'
-                audioElement.load();
-                audioElement.play().then(() => {
+             
+                aud.play().then(() => {
 
                 }, (error)=> {
 
                 });
-                document.getElementById('favicon').href = './favicon-dot.ico';
+                favicon.href = './favicon-dot.ico';
             }
                 //snd.play(;
             if(obj.props.currentTask && (obj.props.currentTask._id  === data._taskId)){
