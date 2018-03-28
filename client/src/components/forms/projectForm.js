@@ -87,7 +87,6 @@ const fields = [
 class ProjectForm extends Component{
 
   createProject(value){
-       console.log(value);
         var userList =  value.Users.map((item) => {
             item._userId  = item._userId ? item._userId : item._id
             return { name:item.name, photo: item.photo, email: item.email, _userId: item._userId };
@@ -99,7 +98,7 @@ class ProjectForm extends Component{
             this.props.createProject(obj);
             this.props.reset();
          }else{
-            this.props.updateProject(obj,this.props.currentProject.index);
+            this.props.updateProject(obj, this.props.currentProject.index);
          }
          
 

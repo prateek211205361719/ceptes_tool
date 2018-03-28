@@ -38,8 +38,7 @@ class App extends Component{
                 audioElement.setAttribute('autoplay', false);
                 audioElement.setAttribute('src', 'media/file-sounds-1101-plucky.mp3'); 
                 audioElement.setAttribute('type', 'audio/mp3'); //or 'audio/ogg'
-                audioElement.setAttribute('autoplay', true);
-                
+                audioElement.play();
                 document.getElementById('favicon').href = './favicon-dot.ico';
             }
                 //snd.play();

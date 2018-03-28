@@ -10,12 +10,12 @@ class HeaderProject extends Component{
     
     changeToProjectPath(projectId){
 
-        var index1;
+       
         var path = `/project/${projectId}`;
         var index = _.findIndex(this.props.project, {_id: projectId});
         if(index > -1){
             var selectedProject  = [].concat(this.props.project);
-            this.props.selectedProject(selectedProject[index], index1);
+            this.props.selectedProject(selectedProject[index], index);
             this.props.history.push(path);
         }
     }

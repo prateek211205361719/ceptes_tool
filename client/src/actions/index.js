@@ -82,9 +82,11 @@ export const createProject = (projectObj) => async function(dispatch){
 }
 
 export const updateProject = (projectObj, index) => async  (dispatch) =>{
+    
     dispatch(showLoading('sectionBar'));
     try{
         var result = await axios.patch('/api/projects', projectObj);
+        console.log(result.data);
         dispatch({
             type:"UPDATE_PROJECT",
             index:index,
