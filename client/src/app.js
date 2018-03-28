@@ -35,13 +35,17 @@ class App extends Component{
            
             if(data._owner[0]._userId !== obj.props.auth._id){
                 var audioElement = document.createElement('audio'); 
-                audioElement.setAttribute('autoplay', false);
                 audioElement.setAttribute('src', 'media/file-sounds-1101-plucky.mp3'); 
                 audioElement.setAttribute('type', 'audio/mp3'); //or 'audio/ogg'
-                audioElement.play();
+                audioElement.load();
+                audioElement.play().then(() => {
+
+                }, (error)=> {
+
+                });
                 document.getElementById('favicon').href = './favicon-dot.ico';
             }
-                //snd.play();
+                //snd.play(;
             if(obj.props.currentTask && (obj.props.currentTask._id  === data._taskId)){
                  obj.props.createComment(data);
                 
